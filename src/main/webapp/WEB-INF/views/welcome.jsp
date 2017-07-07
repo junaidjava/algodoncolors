@@ -68,7 +68,8 @@
 	                </div>
 	                <div id="sidebar-menu">
 	                    <ul>
-	                        <li> <a href="index.html" class="waves-effect"><i class="mdi mdi-home"></i><span> Dashboard <span class="badge badge-primary pull-right">1</span></span></a></li>
+                        <li> <a href="employee-setup.html" class="waves-effect"><span> Employee Setup </span></a></li>
+                        <li> <a href="employee-setup.html" class="waves-effect"><span> Buyer/Supplier Setup </span></a></li>
 	                    </ul>
 	                </div>
 	                <div class="clearfix"></div>
@@ -78,7 +79,7 @@
 	            <div class="content">
 	                <div class="">
 	                    <div class="page-header-title">
-	                        <h4 class="page-title">Blank Page</h4></div>
+	                        <h4 class="page-title">Welcome ${pageContext.request.userPrincipal.name}</h4></div>
 	                </div>
 	                <div class="page-content-wrapper ">
 	                    <div class="container">
