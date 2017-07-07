@@ -28,7 +28,7 @@
 	    <div id="wrapper">
 	        <div class="topbar">
 	            <div class="topbar-left">
-	                <div class="text-center"> <a href="index.html" class="logo">Algodon</a> <a href="index.html" class="logo-sm"><span>A</span></a></div>
+	                <div class="text-center"> <a href="${contextPath}/welcome" class="logo">Algodon</a> <a href="${contextPath}/welcome" class="logo-sm"><span>A</span></a></div>
 	            </div>
 	            <div class="navbar navbar-default" role="navigation">
 	                <div class="container">
@@ -68,8 +68,9 @@
 	                </div>
 	                <div id="sidebar-menu">
 	                    <ul>
-                        <li> <a href="employee-setup.html" class="waves-effect"><span> Employee Setup </span></a></li>
-                        <li> <a href="employee-setup.html" class="waves-effect"><span> Buyer/Supplier Setup </span></a></li>
+                        <li> <a href="${contextPath}/employee-setup" class="waves-effect"><span> Employee Setup </span></a></li>
+                        <li> <a href="${contextPath}/buyer-setup" class="waves-effect"><span> Buyer Setup </span></a></li>
+                        <li> <a href="${contextPath}/supplier-setup" class="waves-effect"><span> Supplier Setup </span></a></li>
 	                    </ul>
 	                </div>
 	                <div class="clearfix"></div>

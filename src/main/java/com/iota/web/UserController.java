@@ -60,4 +60,26 @@ public class UserController {
     public String welcome(Model model) {
         return "welcome";
     }
+
+    @RequestMapping(value = "/employee-setup", method = RequestMethod.GET)
+    public String employeeSetup(Model model) {
+        model.addAttribute("userForm", new User());
+
+        return "employee-setup";
+    }
+
+    @RequestMapping(value = "/employee-setup", method = RequestMethod.POST)
+    public String employeeSetup(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+        userValidator.validate(userForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "employee-setup";
+        }
+
+        userService.save(userForm);
+
+        securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
+
+        return "redirect:/welcome";
+    }
 }

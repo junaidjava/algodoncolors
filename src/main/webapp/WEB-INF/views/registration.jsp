@@ -30,7 +30,7 @@
 	    <div class="wrapper-page">
 	        <div class="panel panel-color panel-primary panel-pages">
 	            <div class="panel-body">
-	                <h3 class="text-center m-t-0 m-b-15"> <a href="index.html" class="logo logo-admin">Algodon</a></h3>
+	                <h3 class="text-center m-t-0 m-b-15"> <a href="${contextPath}/welcome" class="logo logo-admin">Algodon</a></h3>
 	                <h4 class="text-muted text-center m-t-0"><b>Sign Up</b></h4>
 	                <div class="form-horizontal m-t-20">
 				        <spring:bind path="username">
