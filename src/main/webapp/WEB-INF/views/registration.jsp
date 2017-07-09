@@ -11,6 +11,7 @@
     <meta content="Admin Dashboard" name="description" />
     <meta content="ThemeDesign" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="${contextPath}/resources/assets/images/favicon.png">
 
     <title>Create an account</title>
     
