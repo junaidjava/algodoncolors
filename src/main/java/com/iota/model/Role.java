@@ -1,17 +1,22 @@
 package com.iota.model;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "role")
-public class Role {
-    private Long id;
-    private String name;
-    private Set<User> users;
+public class Role implements Serializable{
+	private static final long serialVersionUID = -7480043595634431785L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+    private String name;
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
+
     public Long getId() {
         return id;
     }
@@ -28,7 +33,6 @@ public class Role {
         this.name = name;
     }
 
-    @ManyToMany(mappedBy = "roles")
     public Set<User> getUsers() {
         return users;
     }

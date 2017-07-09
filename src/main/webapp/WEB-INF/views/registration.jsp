@@ -33,9 +33,27 @@
 	                <h3 class="text-center m-t-0 m-b-15"> <a href="${contextPath}/welcome" class="logo logo-admin">Algodon</a></h3>
 	                <h4 class="text-muted text-center m-t-0"><b>Sign Up</b></h4>
 	                <div class="form-horizontal m-t-20">
+				        <spring:bind path="firstName">
+				            <div class="form-group ${status.error ? 'has-error' : ''}">
+				                <form:input type="text" path="firstName" class="form-control" placeholder="FirstName" autofocus="true"></form:input>
+				                <form:errors path="firstName"></form:errors>
+				            </div>
+				        </spring:bind>
+				        <spring:bind path="lastName">
+				            <div class="form-group ${status.error ? 'has-error' : ''}">
+				                <form:input type="text" path="lastName" class="form-control" placeholder="LastName"></form:input>
+				                <form:errors path="lastName"></form:errors>
+				            </div>
+				        </spring:bind>
+				        <spring:bind path="email">
+				            <div class="form-group ${status.error ? 'has-error' : ''}">
+				                <form:input type="text" path="email" class="form-control" placeholder="Email"></form:input>
+				                <form:errors path="email"></form:errors>
+				            </div>
+				        </spring:bind>
 				        <spring:bind path="username">
 				            <div class="form-group ${status.error ? 'has-error' : ''}">
-				                <form:input type="text" path="username" class="form-control" placeholder="Username" autofocus="true"></form:input>
+				                <form:input type="text" path="username" class="form-control" placeholder="Username"></form:input>
 				                <form:errors path="username"></form:errors>
 				            </div>
 				        </spring:bind>
