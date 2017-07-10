@@ -11,7 +11,7 @@
     <meta content="Admin Dashboard" name="description" />
     <meta content="ThemeDesign" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Algodon - Employee List</title>
+    <title>Algodon - User List</title>
     
     <link rel="shortcut icon" href="${contextPath}/resources/assets/images/favicon.ico">
     <link href="${contextPath}/resources/assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
@@ -57,11 +57,13 @@
             <div class="content">
                 <div class="">
                     <div class="page-header-title">
-                        <h4 class="page-title">Employee</h4></div>
+                        <h4 class="page-title">User List</h4></div>
                 </div>
                 <div class="page-content-wrapper ">
 					<div class="container">
-					  <table class="table table-hover">
+					  <a href="${contextPath}/employee-setup">Add User</a>
+					  <input type="text" id="searchStr" onkeyup="searchEngine()" placeholder="Search for usernames">
+					  <table id="userTable" class="table table-hover">
 					    <thead>
 					      <tr>
 					        <th>Username</th>
@@ -89,4 +91,28 @@
 		<%@ include file = "footer.jsp" %>
 
 </body>
+
+<script>
+function searchEngine() {
+  // Declare variables 
+  var input, filter, table, tr, td, i,colInd;
+  input = document.getElementById("searchStr");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("userTable");
+  tr = table.getElementsByTagName("tr");
+  colInd=0;
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[colInd];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+</script>
 </html>

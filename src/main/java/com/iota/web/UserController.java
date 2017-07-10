@@ -40,6 +40,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
+        userForm.setActive(Boolean.TRUE);
 
         userService.save(userForm);
 
