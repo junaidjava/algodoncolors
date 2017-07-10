@@ -42,9 +42,9 @@
                 </div>
                 <div id="sidebar-menu">
                     <ul>
-                        <li> <a href="${contextPath}/employee-setup" class="waves-effect"><span> Employee Setup </span></a></li>
-                        <li> <a href="${contextPath}/buyer-setup" class="waves-effect"><span> Buyer Setup </span></a></li>
-                        <li> <a href="${contextPath}/supplier-setup" class="waves-effect"><span> Supplier Setup </span></a></li>
+                        <li> <a href="${contextPath}/employee-list" class="waves-effect"><span> Employee Setup </span></a></li>
+                        <li> <a href="${contextPath}/buyer-list" class="waves-effect"><span> Buyer Setup </span></a></li>
+                        <li> <a href="${contextPath}/supplier-list" class="waves-effect"><span> Supplier Setup </span></a></li>
                     </ul>
                 </div>
                 <div class="clearfix"></div>
@@ -68,7 +68,7 @@
                             <div class="col-lg-12">
                                 <div class="panel-primary panel">
                                     <div class="panel-body">
-                                    	<form action="/employee-setup" class="form-horizontal" method="post">
+                                    	<form action="${contextPath}/employee-setup" class="form-horizontal" method="post">
 											<div class="form-body">
 												<h3 class="form-section">Employee Info</h3>
 												<div class="row m-b-15">
