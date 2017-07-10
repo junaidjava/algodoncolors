@@ -2,6 +2,10 @@ package com.iota.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +21,8 @@ import com.iota.validator.UserValidator;
 
 @Controller
 public class UserController {
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	
     @Autowired
     private UserService userService;
 
@@ -40,9 +46,10 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-        userForm.setActive(Boolean.TRUE);
 
+        userForm.setActive(Boolean.TRUE);
         userService.save(userForm);
+        logger.debug(String.format("User %s saved successfully!", userForm.getUsername()));
 
         securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
 
@@ -66,8 +73,21 @@ public class UserController {
     }
 
     @RequestMapping(value = "/employee-setup", method = RequestMethod.GET)
-    public String employeeSetup(Model model) {
-        model.addAttribute("userForm", new User());
+    public String employeeSetup(Model model,HttpServletRequest request) {
+    	String strId=request.getParameter("uid");
+        logger.debug(String.format("In method employeSetup UserId:%s found from url", strId));
+    	if(strId==null || strId.trim().length()==0){
+            model.addAttribute("userForm", new User());
+    	}else{
+    		try {
+        		Long id=Long.valueOf(strId);
+        		User selectedUser=userService.getById(id);
+                model.addAttribute("userForm", selectedUser);
+
+			} catch (NumberFormatException nfe) {
+		        logger.error(nfe.getMessage(),nfe.getStackTrace());
+			}
+    	}
 
         return "employee-setup";
     }
@@ -79,12 +99,11 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "employee-setup";
         }
-
+        userForm.setActive(Boolean.TRUE);
         userService.save(userForm);
+        logger.debug(String.format("User %s saved successfully!", userForm.getUsername()));
 
-        securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
-
-        return "redirect:/welcome";
+        return "redirect:/employee-list";
     }
 
     @RequestMapping(value = "/employee-list", method = RequestMethod.GET)

@@ -1,5 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -68,27 +70,42 @@
                             <div class="col-lg-12">
                                 <div class="panel-primary panel">
                                     <div class="panel-body">
-                                    	<form action="${contextPath}/employee-setup" class="form-horizontal" method="post">
+                                    	<form:form action="${contextPath}/employee-setup"  modelAttribute="userForm" class="form-horizontal" method="post">
 											<div class="form-body">
 												<h3 class="form-section">Employee Info</h3>
 												<div class="row m-b-15">
 													<div class="col-md-10">
 														<div class="col-md-6">
+													        <spring:bind path="firstName">
 															<div class="form-group">
 																<label class="control-label col-md-3">First Name</label>
 																<div class="col-md-9">
-																	<input class="form-control" placeholder="" type="text">
+													                <form:input type="text" path="firstName" class="form-control" placeholder=""></form:input>
 																</div>
 															</div>
+					        								</spring:bind>
 														</div>
 														<!--/span-->
 														<div class="col-md-6">
+													        <spring:bind path="lastName">
 															<div class="form-group">
 																<label class="control-label col-md-3">Last Name</label>
 																<div class="col-md-9">
-																	<input class="form-control" placeholder="" type="text">
+													                <form:input type="text" path="lastName" class="form-control" placeholder=""></form:input>
 																</div>
 															</div>
+					        								</spring:bind>
+														</div>
+														<!--/span-->
+														<div class="col-md-6">
+													        <spring:bind path="active">
+															<div class="form-group">
+																<label class="control-label col-md-3">Active</label>
+																<div class="col-md-9">
+													                <input type="checkbox" name="status">Active</input>
+																</div>
+															</div>
+					        								</spring:bind>
 														</div>
 														<!--/span-->
 													</div>
@@ -96,39 +113,51 @@
 												<!--/row-->
 												<div class="row">
 													<div class="col-md-4">
-														<div class="form-group">
+												        <spring:bind path="username">
+														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<label class="control-label col-md-3">User Name</label>
 															<div class="col-md-9">
-																<input class="form-control" placeholder="Unique User Name" type="text">
+												                <form:input type="text" path="username" class="form-control" placeholder="Username"></form:input>
+												                <form:errors path="username"></form:errors>
 															</div>
 														</div>
+				        								</spring:bind>
 													</div>
 													<div class="col-md-4">
-														<div class="form-group">
+												        <spring:bind path="email">
+														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<label class="control-label col-md-3">Email</label>
 															<div class="col-md-9">
-																<input class="form-control" placeholder="abcd@algodon.com" type="text">
+												                <form:input type="text" path="email" class="form-control" placeholder="myname@algodon.com"></form:input>
+												                <form:errors path="email"></form:errors>
 															</div>
 														</div>
+				        								</spring:bind>
 													</div>
 													<!--/span-->
 												</div>
 												<div class="row">
 													<div class="col-md-4">
-														<div class="form-group">
+												        <spring:bind path="password">
+														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<label class="control-label col-md-3">Password</label>
 															<div class="col-md-9">
-																<input class="form-control" type="text">
+												                <form:input type="password" path="password" class="form-control" placeholder="Password"></form:input>
+												                <form:errors path="password"></form:errors>
 															</div>
 														</div>
+				        								</spring:bind>
 													</div>
 													<div class="col-md-4">
-														<div class="form-group">
-															<label class="control-label col-md-3">Re enterpassword</label>
+												        <spring:bind path="passwordConfirm">
+														<div class="form-group ${status.error ? 'has-error' : ''}">
+															<label class="control-label col-md-3">Confirm Password</label>
 															<div class="col-md-9">
-																<input class="form-control" type="text">
+												                <form:input type="password" path="passwordConfirm" class="form-control" placeholder="Confirm your password"></form:input>
+												                <form:errors path="passwordConfirm"></form:errors>
 															</div>
 														</div>
+				        								</spring:bind>
 													</div>
 												</div>
 												<!--/row-->
@@ -143,7 +172,7 @@
 													</div>
 												</div>
 											</div>
-										</form>
+										</form:form>
                                     </div>
                                 </div>
                             </div>

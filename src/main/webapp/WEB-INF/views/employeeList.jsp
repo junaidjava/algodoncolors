@@ -76,7 +76,7 @@
 					    <tbody>
 					    <c:forEach items="${userList}" var="user">
 					      <tr>
-					        <td><a href="${contextPath}/employee-setup">${user.username}</a></td>
+					        <td><a href="${contextPath}/employee-setup?uid=${user.id}">${user.username}</a></td>
 					        <td>${user.firstName}</td>
 					        <td>${user.lastName}</td>
 					        <td>${user.email}</td>
