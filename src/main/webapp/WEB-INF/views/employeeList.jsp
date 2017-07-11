@@ -61,6 +61,12 @@
                 </div>
                 <div class="page-content-wrapper ">
 					<div class="container">
+                   	  <div class="col-sm-12">
+				        <form id="logoutForm" method="POST" action="${contextPath}/logout">
+				            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				        </form>
+                      </div>
+				
 					  <a href="${contextPath}/employee-setup">Add User</a>
 					  <input type="text" id="searchStr" onkeyup="searchEngine()" placeholder="Search for usernames">
 					  <table id="userTable" class="table table-hover">
@@ -76,7 +82,7 @@
 					    <tbody>
 					    <c:forEach items="${userList}" var="user">
 					      <tr>
-					        <td><a href="${contextPath}/employee-setup?uid=${user.id}">${user.username}</a></td>
+					        <td><a href="${contextPath}/edit-user?uid=${user.id}">${user.username}</a></td>
 					        <td>${user.firstName}</td>
 					        <td>${user.lastName}</td>
 					        <td>${user.email}</td>

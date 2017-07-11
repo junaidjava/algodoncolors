@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Add User - Algodon</title>
+    <title>Edit User - Algodon</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta content="Admin Dashboard" name="description" />
     <meta content="ThemeDesign" name="author" />
@@ -56,7 +56,7 @@
             <div class="content">
                 <div class="">
                     <div class="page-header-title">
-                        <h4 class="page-title">Add User</h4></div>
+                        <h4 class="page-title">Edit User</h4></div>
                 </div>
                 <div class="page-content-wrapper ">
                     <div class="container">
@@ -70,7 +70,7 @@
                             <div class="col-lg-12">
                                 <div class="panel-primary panel">
                                     <div class="panel-body">
-                                    	<form:form action="${contextPath}/employee-setup"  modelAttribute="userForm" class="form-horizontal" method="post">
+                                    	<form:form action="${contextPath}/edit-user"  modelAttribute="userForm" class="form-horizontal" method="post">
 											<div class="form-body">
 												<h3 class="form-section">User Info</h3>
 												<div class="row m-b-15">
@@ -110,7 +110,7 @@
 														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<label class="control-label col-md-3">User Name</label>
 															<div class="col-md-9">
-												                <form:input type="text" path="username" class="form-control" placeholder="Username" maxlength="32"></form:input>
+												                <form:input type="text" path="username" class="form-control" readonly="true" maxlength="32"></form:input>
 												                <form:errors path="username"></form:errors>
 															</div>
 														</div>
@@ -135,7 +135,7 @@
 														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<label class="control-label col-md-3">Password</label>
 															<div class="col-md-9">
-												                <form:input type="password" path="password" class="form-control" placeholder="Password" maxlength="60"></form:input>
+												                <form:input type="password" path="password" class="form-control" readonly="true" maxlength="60"></form:input>
 												                <form:errors path="password"></form:errors>
 															</div>
 														</div>
@@ -146,7 +146,7 @@
 														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<label class="control-label col-md-3">Confirm Password</label>
 															<div class="col-md-9">
-												                <form:input type="password" path="passwordConfirm" class="form-control" placeholder="Confirm your password" maxlength="60"></form:input>
+												                <form:input type="password" path="passwordConfirm" class="form-control" readonly="true" maxlength="60"></form:input>
 												                <form:errors path="passwordConfirm"></form:errors>
 															</div>
 														</div>
