@@ -35,7 +35,7 @@ CREATE TABLE `user` (
   `firstName` varchar(255) DEFAULT NULL,
   `lastName` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `active` BIT(1) DEFAULT 1 COMMENT 'True or False, used by admin to active or inactive user',
+  `active` BIT(1) DEFAULT true COMMENT 'True or False, used by admin to active or inactive user',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -59,7 +59,7 @@ CREATE TABLE `buyer` (
   `createdOn` DATETIME DEFAULT NULL ,
   `phone` varchar(255) DEFAULT NULL,
   `address` varchar(512) DEFAULT NULL,
-  `active` bit DEFAULT 1,
+  `active` BIT(1) DEFAULT true,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

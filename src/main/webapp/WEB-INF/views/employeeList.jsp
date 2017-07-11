@@ -92,7 +92,7 @@
 
 </body>
 
-<script>
+<script type="text/javascript">
 function searchEngine() {
   // Declare variables 
   var input, filter, table, tr, td, i,colInd;

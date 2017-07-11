@@ -76,36 +76,29 @@
 												<div class="row m-b-15">
 													<div class="col-md-10">
 														<div class="col-md-6">
-													        <spring:bind path="firstName">
 															<div class="form-group">
 																<label class="control-label col-md-3">First Name</label>
 																<div class="col-md-9">
 													                <form:input type="text" path="firstName" class="form-control" placeholder=""></form:input>
 																</div>
 															</div>
-					        								</spring:bind>
 														</div>
 														<!--/span-->
 														<div class="col-md-6">
-													        <spring:bind path="lastName">
 															<div class="form-group">
 																<label class="control-label col-md-3">Last Name</label>
 																<div class="col-md-9">
 													                <form:input type="text" path="lastName" class="form-control" placeholder=""></form:input>
 																</div>
 															</div>
-					        								</spring:bind>
 														</div>
 														<!--/span-->
 														<div class="col-md-6">
-													        <spring:bind path="active">
 															<div class="form-group">
-																<label class="control-label col-md-3">Active</label>
 																<div class="col-md-9">
-													                <input type="checkbox" name="status">Active</input>
+													                <form:checkbox path="active" value="${active}" label="Active"></form:checkbox>
 																</div>
 															</div>
-					        								</spring:bind>
 														</div>
 														<!--/span-->
 													</div>

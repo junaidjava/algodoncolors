@@ -1,14 +1,15 @@
 package com.iota.service;
 
-import com.iota.model.User;
-import com.iota.repository.RoleRepository;
-import com.iota.repository.UserRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
+import com.iota.enums.RoleName;
+import com.iota.model.User;
+import com.iota.repository.RoleRepository;
+import com.iota.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles(new HashSet<>(roleRepository.findAll()));
+        user.getRoles().add(roleRepository.getByName(RoleName.ROLE_USER.getValue()));
         userRepository.save(user);
     }
 

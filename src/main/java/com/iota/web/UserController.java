@@ -47,7 +47,6 @@ public class UserController {
             return "registration";
         }
 
-        userForm.setActive(Boolean.TRUE);
         userService.save(userForm);
         logger.debug(String.format("User %s saved successfully!", userForm.getUsername()));
 
@@ -99,7 +98,6 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "employee-setup";
         }
-        userForm.setActive(Boolean.TRUE);
         userService.save(userForm);
         logger.debug(String.format("User %s saved successfully!", userForm.getUsername()));
 
