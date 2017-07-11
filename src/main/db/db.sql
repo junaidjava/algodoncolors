@@ -15,8 +15,9 @@ mysql -ujunaid -pjunaid -hlocalhost db_algodon
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
-  `name` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `name` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table `role`
@@ -30,13 +31,14 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
+  `username` varchar(32) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `firstName` varchar(255) DEFAULT NULL,
   `lastName` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
   `active` BIT(1) DEFAULT true COMMENT 'True or False, used by admin to active or inactive user',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- Table structure for table `user_role`
@@ -53,14 +55,15 @@ CREATE TABLE `user_role` (
 DROP TABLE IF EXISTS `buyer`;
 CREATE TABLE `buyer` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
-  `name` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `contactPerson` varchar(255) DEFAULT NULL,
-  `createdOn` DATETIME DEFAULT NULL ,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `contactPerson` varchar(255) NOT NULL,
+  `createdOn` DATETIME NOT NULL ,
   `phone` varchar(255) DEFAULT NULL,
   `address` varchar(512) DEFAULT NULL,
   `active` BIT(1) DEFAULT true,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
     

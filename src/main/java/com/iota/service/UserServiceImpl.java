@@ -41,4 +41,14 @@ public class UserServiceImpl implements UserService {
 	public User getById(Long id) {
 		return userRepository.findOne(id);
 	}
+
+	@Override
+	public void update(User userForm) {
+		User dbUser=userRepository.findByUsername(userForm.getUsername());
+		dbUser.setActive(userForm.getActive());
+		dbUser.setEmail(userForm.getEmail());
+		dbUser.setFirstName(userForm.getFirstName());
+		dbUser.setLastName(userForm.getLastName());
+		userRepository.save(dbUser);
+	}
 }

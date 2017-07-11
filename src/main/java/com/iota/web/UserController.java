@@ -73,21 +73,7 @@ public class UserController {
 
     @RequestMapping(value = "/employee-setup", method = RequestMethod.GET)
     public String employeeSetup(Model model,HttpServletRequest request) {
-    	String strId=request.getParameter("uid");
-        logger.debug(String.format("In method employeSetup UserId:%s found from url", strId));
-    	if(strId==null || strId.trim().length()==0){
-            model.addAttribute("userForm", new User());
-    	}else{
-    		try {
-        		Long id=Long.valueOf(strId);
-        		User selectedUser=userService.getById(id);
-                model.addAttribute("userForm", selectedUser);
-
-			} catch (NumberFormatException nfe) {
-		        logger.error(nfe.getMessage(),nfe.getStackTrace());
-			}
-    	}
-
+        model.addAttribute("userForm", new User());
         return "employee-setup";
     }
 
@@ -111,6 +97,40 @@ public class UserController {
         model.addAttribute("userList", userList);
 
         return "employeeList";
+    }
+
+    // this method will be called from user list
+    @RequestMapping(value = "/edit-user", method = RequestMethod.GET)
+    public String editUser(Model model,HttpServletRequest request) {
+    	String strId=request.getParameter("uid");
+        logger.debug(String.format("In editUser() UserId:%s found from url", strId));
+    	if(strId==null || strId.trim().length()==0){
+            model.addAttribute("userForm", new User());
+    	}else{
+    		try {
+        		Long id=Long.valueOf(strId);
+        		User selectedUser=userService.getById(id);
+                model.addAttribute("userForm", selectedUser);
+
+			} catch (NumberFormatException nfe) {
+		        logger.error(nfe.getMessage(),nfe.getStackTrace());
+			}
+    	}
+
+        return "editUser";
+    }
+
+    @RequestMapping(value = "/edit-user", method = RequestMethod.POST)
+    public String editUser(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+        userValidator.validateUpdate(userForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "editUser";
+        }
+        userService.update(userForm);
+        logger.debug(String.format("User %s updated successfully!", userForm.getUsername()));
+
+        return "redirect:/employee-list";
     }
 
 }

@@ -79,7 +79,7 @@
 															<div class="form-group">
 																<label class="control-label col-md-3">First Name</label>
 																<div class="col-md-9">
-													                <form:input type="text" path="firstName" class="form-control" placeholder=""></form:input>
+													                <form:input type="text" path="firstName" class="form-control" maxlength="255"></form:input>
 																</div>
 															</div>
 														</div>
@@ -88,7 +88,7 @@
 															<div class="form-group">
 																<label class="control-label col-md-3">Last Name</label>
 																<div class="col-md-9">
-													                <form:input type="text" path="lastName" class="form-control" placeholder=""></form:input>
+													                <form:input type="text" path="lastName" class="form-control" maxlength="255"></form:input>
 																</div>
 															</div>
 														</div>
@@ -110,7 +110,7 @@
 														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<label class="control-label col-md-3">User Name</label>
 															<div class="col-md-9">
-												                <form:input type="text" path="username" class="form-control" placeholder="Username"></form:input>
+												                <form:input type="text" path="username" class="form-control" placeholder="Username" maxlength="32"></form:input>
 												                <form:errors path="username"></form:errors>
 															</div>
 														</div>
@@ -121,7 +121,7 @@
 														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<label class="control-label col-md-3">Email</label>
 															<div class="col-md-9">
-												                <form:input type="text" path="email" class="form-control" placeholder="myname@algodon.com"></form:input>
+												                <form:input type="text" path="email" class="form-control" placeholder="myname@algodon.com" maxlength="255"></form:input>
 												                <form:errors path="email"></form:errors>
 															</div>
 														</div>
@@ -135,7 +135,7 @@
 														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<label class="control-label col-md-3">Password</label>
 															<div class="col-md-9">
-												                <form:input type="password" path="password" class="form-control" placeholder="Password"></form:input>
+												                <form:input type="password" path="password" class="form-control" placeholder="Password" maxlength="60"></form:input>
 												                <form:errors path="password"></form:errors>
 															</div>
 														</div>
@@ -146,7 +146,7 @@
 														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<label class="control-label col-md-3">Confirm Password</label>
 															<div class="col-md-9">
-												                <form:input type="password" path="passwordConfirm" class="form-control" placeholder="Confirm your password"></form:input>
+												                <form:input type="password" path="passwordConfirm" class="form-control" placeholder="Confirm your password" maxlength="60"></form:input>
 												                <form:errors path="passwordConfirm"></form:errors>
 															</div>
 														</div>
