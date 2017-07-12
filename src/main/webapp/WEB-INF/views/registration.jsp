@@ -36,39 +36,39 @@
 	                <div class="form-horizontal m-t-20">
 				        <spring:bind path="firstName">
 				            <div class="form-group ${status.error ? 'has-error' : ''}">
-				                <form:input type="text" path="firstName" class="form-control" placeholder="FirstName" autofocus="true"></form:input>
+				                <form:input type="text" path="firstName" class="form-control"  maxlength="255" autofocus="true"></form:input>
 				                <form:errors path="firstName"></form:errors>
 				            </div>
 				        </spring:bind>
 				        <spring:bind path="lastName">
 				            <div class="form-group ${status.error ? 'has-error' : ''}">
-				                <form:input type="text" path="lastName" class="form-control" placeholder="LastName"></form:input>
+				                <form:input type="text" path="lastName" class="form-control"  maxlength="255"></form:input>
 				                <form:errors path="lastName"></form:errors>
 				            </div>
 				        </spring:bind>
 				        <spring:bind path="email">
 				            <div class="form-group ${status.error ? 'has-error' : ''}">
-				                <form:input type="text" path="email" class="form-control" placeholder="Email"></form:input>
+				                <form:input type="text" path="email" class="form-control" placeholder="Email" maxlength="255"></form:input>
 				                <form:errors path="email"></form:errors>
 				            </div>
 				        </spring:bind>
 				        <spring:bind path="username">
 				            <div class="form-group ${status.error ? 'has-error' : ''}">
-				                <form:input type="text" path="username" class="form-control" placeholder="Username"></form:input>
+				                <form:input type="text" path="username" class="form-control" placeholder="Username" maxlength="32"></form:input>
 				                <form:errors path="username"></form:errors>
 				            </div>
 				        </spring:bind>
 				        
 				        <spring:bind path="password">
 				            <div class="form-group ${status.error ? 'has-error' : ''}">
-				                <form:input type="password" path="password" class="form-control" placeholder="Password"></form:input>
+				                <form:input type="password" path="password" class="form-control" placeholder="Password" maxlength="32"></form:input>
 				                <form:errors path="password"></form:errors>
 				            </div>
 				        </spring:bind>
 				
 				        <spring:bind path="passwordConfirm">
 				            <div class="form-group ${status.error ? 'has-error' : ''}">
-				                <form:input type="password" path="passwordConfirm" class="form-control" placeholder="Confirm your password"></form:input>
+				                <form:input type="password" path="passwordConfirm" class="form-control" placeholder="Confirm your password" maxlength="32"></form:input>
 				                <form:errors path="passwordConfirm"></form:errors>
 				            </div>
 				        </spring:bind>
