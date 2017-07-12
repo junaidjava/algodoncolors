@@ -10,21 +10,8 @@
     <meta content="Admin Dashboard" name="description" />
     <meta content="ThemeDesign" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Algodon - Buyer</title>
-    
-    <link rel="shortcut icon" href="${contextPath}/resources/assets/images/favicon.ico">
-    <link href="${contextPath}/resources/assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
-    <link href="${contextPath}/resources/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
-    <link href="${contextPath}/resources/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
-    <link href="${contextPath}/resources/assets/plugins/bootstrap-touchspin/css/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
-    <link href="${contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="${contextPath}/resources/assets/css/icons.css" rel="stylesheet" type="text/css">
-    <link href="${contextPath}/resources/assets/css/style.css" rel="stylesheet" type="text/css">
-</head>
-
-<body>
-    <div id="wrapper">
-   		<%@ include file = "header.jsp" %>
+    <title>Add Buyer - Algodon</title>
+<%@ include file = "header.jsp" %>
 
         <div class="left side-menu">
             <div class="sidebar-inner slimscrollleft">
@@ -56,7 +43,7 @@
             <div class="content">
                 <div class="">
                     <div class="page-header-title">
-                        <h4 class="page-title">Buyer Setup</h4></div>
+                        <h4 class="page-title">Buyer Info</h4></div>
                 </div>
                 <div class="page-content-wrapper ">
                     <div class="container">
@@ -64,28 +51,23 @@
                             <div class="col-lg-12">
                                 <div class="panel-primary panel">
                                     <div class="panel-body">
-                                    	<form action="${contextPath}/buyer-setup" class="form-horizontal" method="post">
+                                    	<form action="${contextPath}/buyer-setup" class="horizontal-form" method="post">
 											<div class="form-body">
-												<h3 class="form-section">Buyer Info</h3>
 												<div class="row">
 													<div class="col-md-6">
 														<div class="form-group">
-															<label class="control-label col-md-3">Buyer Name</label>
-															<div class="col-md-9">
-																<input class="form-control" placeholder="Full Name" type="text">
-															</div>
+															<label class="control-label">Buyer Name</label>
+															<input class="form-control" placeholder="Full Name" type="text">
 														</div>
 													</div>
 													<!--/span-->
 													<div class="col-md-6">
 														<div class="form-group">
-															<label class="control-label col-md-3">Start Date</label>
-															<div class="col-md-9">
-																<div class="input-group">
-                                                            		<input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker"> 
-                                                            		<span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
-                                                            	</div>
-															</div>
+															<label class="control-label">Start Date</label>
+															<div class="input-group">
+                                                           		<input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker"> 
+                                                           		<span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
+                                                           	</div>
 														</div>
 													</div>
 													<!--/span-->
@@ -94,48 +76,41 @@
 												<div class="row">
 													<div class="col-md-6">
 														<div class="form-group">
-															<label class="control-label col-md-3">City/Country</label>
-															<div class="col-md-9">
-																<input class="form-control" type="text">
-															</div>
+															<label class="control-label">City/Country</label>
+															<input class="form-control" type="text">
 														</div>
 													</div>
 													<!--/span-->
 													<div class="col-md-6">
 														<div class="form-group">
-															<label class="control-label col-md-3">Office Address</label>
-															<div class="col-md-9">
-																<textarea id="textarea" class="form-control" maxlength="512" rows="3" placeholder="This textarea has a limit of 512 chars."></textarea>
-															</div>
+															<label class="control-label">Office Address</label>
+															<textarea id="textarea" class="form-control" maxlength="512" rows="3" placeholder="This textarea has a limit of 512 chars."></textarea>
 														</div>
 													</div>
 													<!--/span-->
 												</div>
 												<!--/row-->
 												<div class="row">
-													<div class="col-md-4">
+													<div class="col-md-6">
 														<div class="form-group">
-															<label class="control-label col-md-3">Email</label>
-															<div class="col-md-9">
-																<input class="form-control" placeholder="abcd@gmail.com" type="text">
-															</div>
+															<label class="control-label">Email</label>
+															<input class="form-control" placeholder="abcd@gmail.com" type="text">
 														</div>
 													</div>
-													<div class="col-md-4">
+													<div class="col-md-6">
 														<div class="form-group">
-															<label class="control-label col-md-3">Phone#</label>
-															<div class="col-md-9">
-																<input class="form-control" type="text">
-															</div>
+															<label class="control-label">Phone#</label>
+															<input class="form-control" type="text">
 														</div>
 													</div>
 													<!--/span-->
-													<div class="col-md-4">
+												</div>
+												<!--/row-->
+												<div class="row">
+													<div class="col-md-6">
 														<div class="form-group">
-															<label class="control-label col-md-3">Contact Person</label>
-															<div class="col-md-9">
-																<input class="form-control" placeholder="Full Name" type="text">
-															</div>
+															<label class="control-label">Contact Person</label>
+															<input class="form-control" placeholder="Full Name" type="text">
 														</div>
 													</div>
 													<!--/span-->
@@ -146,8 +121,6 @@
 												<div class="row">
 													<div class="col-md-12 text-right">
 														<button type="submit" class="btn btn-primary">Save</button>
-													</div>
-													<div class="col-md-6">
 													</div>
 												</div>
 											</div>
@@ -160,6 +133,3 @@
                 </div>
             </div>
 		<%@ include file = "footer.jsp" %>
-</body>
-
-</html>
