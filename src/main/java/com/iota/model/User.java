@@ -4,6 +4,7 @@ package com.iota.model;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -25,7 +26,7 @@ public class User implements Serializable{
 
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private Set<Role> roles=new HashSet<>();
 
     public Long getId() {
         return id;

@@ -1,6 +1,7 @@
 package com.iota.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,7 @@ public class Buyer implements Serializable{
     private Long id;
     private String name;
     private String contactPerson;
+    private Date createdOn;
     private String email;
     private String phone;
     private String address;
@@ -40,6 +42,12 @@ public class Buyer implements Serializable{
 	}
 	public void setContactPerson(String contactPerson) {
 		this.contactPerson = contactPerson;
+	}
+	public Date getCreatedOn() {
+		return createdOn;
+	}
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
 	}
 	public String getEmail() {
 		return email;
