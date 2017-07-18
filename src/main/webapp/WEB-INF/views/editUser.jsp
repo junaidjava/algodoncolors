@@ -55,32 +55,29 @@
                             <div class="col-lg-12">
                                 <div class="panel-primary panel">
                                     <div class="panel-body">
-                                    	<form:form action="${contextPath}/edit-user"  modelAttribute="userForm" class="form-horizontal" method="post">
+                                    	<form:form action="${contextPath}/edit-user"  modelAttribute="userForm" class="horizontal-form" method="post">
 											<div class="form-body">
-												<h3 class="form-section">User Info</h3>
-												<div class="row m-b-15">
-													<div class="col-md-10">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">First Name</label>
-													            <form:input type="text" path="firstName" class="form-control" maxlength="255"></form:input>
-															</div>
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label">First Name</label>
+												            <form:input type="text" path="firstName" class="form-control" maxlength="255"></form:input>
 														</div>
-														<!--/span-->
-														<div class="col-md-6">
-															<div class="form-group">
-																<label class="control-label">Last Name</label>
-																<form:input type="text" path="lastName" class="form-control" maxlength="255"></form:input>
-															</div>
-														</div>
-														<!--/span-->
-														<div class="col-md-6">
-															<div class="form-group">
-																<form:checkbox path="active" value="${active}" label="Active"></form:checkbox>
-															</div>
-														</div>
-														<!--/span-->
 													</div>
+													<!--/span-->
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label">Last Name</label>
+															<form:input type="text" path="lastName" class="form-control" maxlength="255"></form:input>
+														</div>
+													</div>
+													<!--/span-->
+													<div class="col-md-6">
+														<div class="form-group">
+															<form:checkbox path="active" value="${active}" label="Active"></form:checkbox>
+														</div>
+													</div>
+													<!--/span-->
 												</div>
 												<!--/row-->
 												<div class="row">

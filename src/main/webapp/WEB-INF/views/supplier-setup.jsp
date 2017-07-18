@@ -38,7 +38,7 @@
             <div class="content">
                 <div class="">
                     <div class="page-header-title">
-                        <h4 class="page-title">Supplier Info</h4></div>
+                        <h4 class="page-title">Add Supplier</h4></div>
                 </div>
                 <div class="page-content-wrapper ">
                     <div class="container">
@@ -128,6 +128,5 @@
                 </div>
             </div>
 		<%@ include file = "footer.jsp" %>
-</body>
-
-</html>
+		<script src="${contextPath}/resources/assets/pages/form-advanced.js"></script>
+    	<script src="${contextPath}/resources/assets/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>

@@ -38,7 +38,7 @@
             <div class="content">
                 <div class="">
                     <div class="page-header-title">
-                        <h4 class="page-title">Buyer Info</h4></div>
+                        <h4 class="page-title">Add Buyer</h4></div>
                 </div>
                 <div class="page-content-wrapper ">
                     <div class="container">
@@ -128,3 +128,4 @@
                 </div>
             </div>
 		<%@ include file = "footer.jsp" %>
+    	<script src="${contextPath}/resources/assets/pages/form-advanced.js"></script>
