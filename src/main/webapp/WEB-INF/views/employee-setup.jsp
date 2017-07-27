@@ -78,7 +78,7 @@
 													<div class="col-md-6">
 														<div class="form-check">
 															<label class="form-check-label">
-													            <form:checkbox path="active" class="form-check-input" value="${active}" label="&nbsp;Active"></form:checkbox>
+													            <form:checkbox path="active" class="form-check-input" value="${active}" label="Active"></form:checkbox>
 													        </label>
 														</div>
 													</div>
