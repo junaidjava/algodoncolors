@@ -39,7 +39,7 @@
 	                            <button type="button" class="button-menu-mobile open-left waves-effect waves-light"> <i class="ion-navicon"></i> </button> <span class="clearfix"></span></div>
 	                        <ul class="nav navbar-nav navbar-right pull-right">
 	                            <li class="dropdown">
-	                                <a href="#" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"> <img src="${contextPath}/resources/assets/images/users/avatar-1.jpg" alt="user-img" class="img-circle"> <span class="profile-username"> Kenny Rigdon</span> </a>
+	                                <a href="#" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"> <img src="${contextPath}/resources/assets/images/users/${pageContext.request.userPrincipal.name}.jpg" alt="user-img" class="img-circle"> <span class="profile-username"> Kenny Rigdon</span> </a>
 	                                <ul class="dropdown-menu">
 	                                    <li><a href="javascript:void(0)"> Profile</a></li>
 	                                    <li><a href="javascript:void(0)"><span class="badge badge-success pull-right">5</span> Settings </a></li>

@@ -58,21 +58,23 @@
 										  		<table id="datatable" class="table table-striped table-bordered dataTable no-footer">
 										    		<thead>
 										      			<tr>
-										        			<th>Username</th>
-										        			<th>FirstName</th>
-										        			<th>LastName</th>
+										        			<th>BuyerName</th>
+										        			<th>ContactPerson</th>
+										        			<th>CreatedOn</th>
 										        			<th>Email</th>
+										        			<th>Phone</th>
 										        			<th>Status</th>
 										     			 </tr>
 										    		</thead>
 										    		<tbody>
-										    		<c:forEach items="${userList}" var="user">
+										    		<c:forEach items="${buyerList}" var="buyer">
 										      			<tr>
-										        			<td><a href="${contextPath}/edit-user?uid=${user.id}">${user.username}</a></td>
-										        			<td>${user.firstName}</td>
-										        			<td>${user.lastName}</td>
-										        			<td>${user.email}</td>
-										        			<td>${user.active}</td>
+										        			<td><a href="${contextPath}/edit-buyer?uid=${buyer.id}">${buyer.name}</a></td>
+										        			<td>${buyer.contactPerson}</td>
+										        			<td>${buyer.createdOn}</td>
+										        			<td>${buyer.email}</td>
+										        			<td>${buyer.phone}</td>
+										        			<td>${buyer.active}</td>
 										      			</tr>
 										      		</c:forEach>
 										    		</tbody>

@@ -72,7 +72,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/employee-setup", method = RequestMethod.GET)
-    public String employeeSetup(Model model,HttpServletRequest request) {
+    public String employeeSetup(Model model) {
         model.addAttribute("userForm", new User());
         return "employee-setup";
     }

@@ -11,9 +11,9 @@
         <div class="left side-menu">
             <div class="sidebar-inner slimscrollleft">
                 <div class="user-details">
-                    <div class="text-center"> <img src="${contextPath}/resources/assets/images/users/avatar-1.jpg" alt="" class="img-circle"></div>
+                    <div class="text-center"> <img src="${contextPath}/resources/assets/images/users/${pageContext.request.userPrincipal.name}.jpg" alt="" class="img-circle"></div>
                     <div class="user-info">
-                        <div class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Kenny Rigdon</a>
+                        <div class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">${pageContext.request.userPrincipal.name}</a>
                             <ul class="dropdown-menu">
                                 <li><a href="javascript:void(0)"> Profile</a></li>
                                 <li><a href="javascript:void(0)"> Settings</a></li>
@@ -43,24 +43,34 @@
                 <div class="page-content-wrapper ">
                     <div class="container">
                         <div class="row">
+                        <div class="row">
+                        	<div class="col-sm-12">
+						        <form id="logoutForm" method="POST" action="${contextPath}/logout">
+						            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+						        </form>
+                            </div>
+                        
                             <div class="col-lg-12">
                                 <div class="panel-primary panel">
                                     <div class="panel-body">
-                                    	<form action="${contextPath}/buyer-setup" class="horizontal-form" method="post">
+                                    	<form:form action="${contextPath}/buyer-setup" modelAttribute="buyerForm" class="horizontal-form" method="post">
 											<div class="form-body">
 												<div class="row">
 													<div class="col-md-6">
-														<div class="form-group">
+												        <spring:bind path="name">
+														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<label class="control-label">Buyer Name</label>
-															<input class="form-control" placeholder="Full Name" type="text">
+											                <form:input type="text" path="name" class="form-control" placeholder="Full Buyer Name" maxlength="255"></form:input>
+											                <form:errors path="name"></form:errors>
 														</div>
+				        								</spring:bind>
 													</div>
 													<!--/span-->
 													<div class="col-md-6">
 														<div class="form-group">
 															<label class="control-label">Start Date</label>
 															<div class="input-group">
-                                                           		<input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker"> 
+																<form:input path="createdOn" class="form-control" placeholder="mm/dd/yyyy" type="text"></form:input>
                                                            		<span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                                                            	</div>
 														</div>
@@ -72,14 +82,14 @@
 													<div class="col-md-6">
 														<div class="form-group">
 															<label class="control-label">City/Country</label>
-															<input class="form-control" type="text">
+															<form:input path="city" class="form-control" maxlength="255" placeholder="Karachi, Pakistan" type="text"></form:input>
 														</div>
 													</div>
 													<!--/span-->
 													<div class="col-md-6">
 														<div class="form-group">
 															<label class="control-label">Office Address</label>
-															<textarea id="textarea" class="form-control" maxlength="512" rows="3" placeholder="This textarea has a limit of 512 chars."></textarea>
+															<form:input path="address" class="form-control" maxlength="512" rows="3" placeholder="This textarea has a limit of 512 chars." type="textarea"></form:input>
 														</div>
 													</div>
 													<!--/span-->
@@ -87,15 +97,18 @@
 												<!--/row-->
 												<div class="row">
 													<div class="col-md-6">
-														<div class="form-group">
+												        <spring:bind path="email">
+														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<label class="control-label">Email</label>
-															<input class="form-control" placeholder="abcd@gmail.com" type="text">
+											                <form:input type="text" path="email" class="form-control" placeholder="myname@algodon.com" maxlength="255"></form:input>
+											                <form:errors path="email"></form:errors>
 														</div>
+				        								</spring:bind>
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
 															<label class="control-label">Phone#</label>
-															<input class="form-control" type="text">
+											                <form:input type="text" path="phone" class="form-control" placeholder="+922134966532" maxlength="20"></form:input>
 														</div>
 													</div>
 													<!--/span-->
@@ -103,10 +116,13 @@
 												<!--/row-->
 												<div class="row">
 													<div class="col-md-6">
-														<div class="form-group">
+												        <spring:bind path="contactPerson">
+														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<label class="control-label">Contact Person</label>
-															<input class="form-control" placeholder="Full Name" type="text">
+											                <form:input type="text" path="contactPerson" class="form-control" placeholder="Representative" maxlength="255"></form:input>
+											                <form:errors path="contactPerson"></form:errors>
 														</div>
+				        								</spring:bind>
 													</div>
 													<!--/span-->
 												</div>
@@ -119,7 +135,7 @@
 													</div>
 												</div>
 											</div>
-										</form>
+										</form:form>
                                     </div>
                                 </div>
                             </div>

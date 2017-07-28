@@ -132,7 +132,6 @@
 												<div class="row">
 													<div class="col-md-12 text-right">
 														<button type="submit" class="btn btn-primary">Save</button>
-														<!--<button type="button" class="btn btn-default">Find</button> -->
 													</div>
 												</div>
 											</div>
