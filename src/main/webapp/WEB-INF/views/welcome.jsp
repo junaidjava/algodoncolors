@@ -28,8 +28,8 @@
 	                <div id="sidebar-menu">
 	                    <ul>
                         <li> <a href="${contextPath}/employee-list" class="waves-effect"><span> Employee Setup </span></a></li>
-                        <li> <a href="${contextPath}/buyer-setup" class="waves-effect"><span> Buyer Setup </span></a></li>
-                        <li> <a href="${contextPath}/supplier-setup" class="waves-effect"><span> Supplier Setup </span></a></li>
+                        <li> <a href="${contextPath}/buyer-list" class="waves-effect"><span> Buyer Setup </span></a></li>
+                        <li> <a href="${contextPath}/supplier-list" class="waves-effect"><span> Supplier Setup </span></a></li>
 	                    </ul>
 	                </div>
 	                <div class="clearfix"></div>

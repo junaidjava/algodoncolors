@@ -19,7 +19,9 @@ public class Buyer implements Serializable{
     private Long id;
     private String name;
     private String contactPerson;
+
     private Date createdOn;
+    
     private String email;
     private String phone;
     private String city;

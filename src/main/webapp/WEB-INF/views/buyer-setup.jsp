@@ -1,5 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -54,6 +56,7 @@
                                 <div class="panel-primary panel">
                                     <div class="panel-body">
                                     	<form:form action="${contextPath}/buyer-setup" modelAttribute="buyerForm" class="horizontal-form" method="post">
+											<form:input path="id" type="hidden" ></form:input>
 											<div class="form-body">
 												<div class="row">
 													<div class="col-md-6">
@@ -68,9 +71,9 @@
 													<!--/span-->
 													<div class="col-md-6">
 														<div class="form-group">
-															<label class="control-label">Start Date</label>
+															<label class="control-label">Start Date<span class="required" aria-required="true"> * </span></label>
 															<div class="input-group">
-																<form:input path="createdOn" class="form-control" placeholder="mm/dd/yyyy" type="text"></form:input>
+																<form:input path="createdOn" class="form-control" placeholder="mm/dd/yyyy" type="date" ></form:input>
                                                            		<span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
                                                            	</div>
 														</div>
@@ -123,6 +126,14 @@
 											                <form:errors path="contactPerson"></form:errors>
 														</div>
 				        								</spring:bind>
+													</div>
+													<!--/span-->
+													<div class="col-md-6">
+														<div class="form-check">
+															<label class="form-check-label">
+													            <form:checkbox path="active" class="form-check-input" value="${active}" label="Active"></form:checkbox>
+													        </label>
+														</div>
 													</div>
 													<!--/span-->
 												</div>

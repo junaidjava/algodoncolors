@@ -1,11 +1,13 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>User List - Algodon</title>
+    <title>Buyer List - Algodon</title>
     
    		<%@ include file = "header.jsp" %>
 
@@ -27,8 +29,8 @@
                 </div>
                 <div id="sidebar-menu">
                     <ul>
-                        <li> <a href="#" class="waves-effect"><span> Employee Setup </span></a></li>
-                        <li> <a href="${contextPath}/buyer-list" class="waves-effect"><span> Buyer Setup </span></a></li>
+                        <li> <a href="${contextPath}/employee-list" class="waves-effect"><span> Employee Setup </span></a></li>
+                        <li> <a href="#" class="waves-effect"><span> Buyer Setup </span></a></li>
                         <li> <a href="${contextPath}/supplier-list" class="waves-effect"><span> Supplier Setup </span></a></li>
                     </ul>
                 </div>
@@ -39,7 +41,7 @@
             <div class="content">
                 <div class="">
                     <div class="page-header-title">
-                        <h4 class="page-title">User List</h4></div>
+                        <h4 class="page-title">Buyer List</h4></div>
                 </div>
                 <div class="page-content-wrapper ">
 					<div class="container">
@@ -49,7 +51,7 @@
 									<div class="panel-body">
 										<div class="row m-b-15">
 											<div class="col-sm-12 text-right">
-												<a href="${contextPath}/employee-setup" class="btn btn-success">Add User</a>
+												<a href="${contextPath}/buyer-setup" class="btn btn-success">Add Buyer</a>
 											</div>
 										</div>
 										
@@ -71,7 +73,7 @@
 										      			<tr>
 										        			<td><a href="${contextPath}/edit-buyer?uid=${buyer.id}">${buyer.name}</a></td>
 										        			<td>${buyer.contactPerson}</td>
-										        			<td>${buyer.createdOn}</td>
+										        			<td><fmt:formatDate pattern = "MM-dd-yyyy" value = "${buyer.createdOn}" /></td>
 										        			<td>${buyer.email}</td>
 										        			<td>${buyer.phone}</td>
 										        			<td>${buyer.active}</td>

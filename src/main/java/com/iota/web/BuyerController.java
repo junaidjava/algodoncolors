@@ -67,7 +67,7 @@ public class BuyerController {
     	}else{
     		try {
         		Long id=Long.valueOf(strId);
-        		Buyer selectedBuyer=repository.getOne(id);
+        		Buyer selectedBuyer=repository.findOne(id);
                 model.addAttribute("buyerForm", selectedBuyer);
 
 			} catch (NumberFormatException nfe) {
