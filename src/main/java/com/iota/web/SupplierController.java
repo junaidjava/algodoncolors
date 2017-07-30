@@ -68,7 +68,7 @@ public class SupplierController {
     	}else{
     		try {
         		Long id=Long.valueOf(strId);
-        		Supplier selectedSupplier=repository.getOne(id);
+        		Supplier selectedSupplier=repository.findOne(id);
                 model.addAttribute("supplierForm", selectedSupplier);
 
 			} catch (NumberFormatException nfe) {

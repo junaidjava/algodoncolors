@@ -14,7 +14,7 @@
 	                <div class="user-details">
 	                    <div class="text-center"> <img src="${contextPath}/resources/assets/images/users/${pageContext.request.userPrincipal.name}.jpg" alt="" class="img-circle"></div>
 	                    <div class="user-info">
-	                        <div class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Kenny Rigdon</a>
+	                        <div class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">${pageContext.request.userPrincipal.name}</a>
 	                            <ul class="dropdown-menu">
 	                                <li><a href="javascript:void(0)"> Profile</a></li>
 	                                <li><a href="javascript:void(0)"> Settings</a></li>

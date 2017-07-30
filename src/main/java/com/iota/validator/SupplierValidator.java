@@ -20,7 +20,7 @@ public class SupplierValidator implements Validator {
     	Supplier supplier = (Supplier) o;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty");
-        if (supplier.getName().length() < 6 || supplier.getName().length() > 32) {
+        if (supplier.getName().length() < 6 || supplier.getName().length() > 255) {
             errors.rejectValue("name", "size.user.username");
         }
 
@@ -30,7 +30,7 @@ public class SupplierValidator implements Validator {
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contactPerson", "NotEmpty");
-        if (supplier.getContactPerson().length() < 6 || supplier.getContactPerson().length() > 32) {
+        if (supplier.getContactPerson().length() < 6 || supplier.getContactPerson().length() > 255) {
             errors.rejectValue("contactPerson", "size.user.username");
         }
 
