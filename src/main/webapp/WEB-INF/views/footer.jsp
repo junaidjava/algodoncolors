@@ -17,6 +17,7 @@
     <script src="${contextPath}/resources/assets/plugins/timepicker/bootstrap-timepicker.js"></script>
     <script src="${contextPath}/resources/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
     <script src="${contextPath}/resources/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="${contextPath}/resources/assets/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
     <script src="${contextPath}/resources/assets/plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js" type="text/javascript"></script>
     
     <script src="${contextPath}/resources/assets/plugins/datatables/jquery.dataTables.min.js"></script>

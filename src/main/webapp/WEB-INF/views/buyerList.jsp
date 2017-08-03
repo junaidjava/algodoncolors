@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Buyer List - Algodon</title>
+    <title>Buyers List - Algodon</title>
     
    		<%@ include file = "header.jsp" %>
 
@@ -41,7 +41,7 @@
             <div class="content">
                 <div class="">
                     <div class="page-header-title">
-                        <h4 class="page-title">Buyer List</h4></div>
+                        <h4 class="page-title">Buyers List</h4></div>
                 </div>
                 <div class="page-content-wrapper ">
 					<div class="container">
@@ -60,9 +60,9 @@
 										  		<table id="datatable" class="table table-striped table-bordered dataTable no-footer">
 										    		<thead>
 										      			<tr>
-										        			<th>BuyerName</th>
-										        			<th>ContactPerson</th>
-										        			<th>CreatedOn</th>
+										        			<th>Buyer Name</th>
+										        			<th>Contact Person</th>
+										        			<th>Created On</th>
 										        			<th>Email</th>
 										        			<th>Phone</th>
 										        			<th>Status</th>

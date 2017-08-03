@@ -63,7 +63,7 @@
 												        <spring:bind path="name">
 														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<label class="control-label">Buyer Name</label>
-											                <form:input type="text" path="name" class="form-control" placeholder="Full Buyer Name" maxlength="255"></form:input>
+											                <form:input type="text" path="name" class="form-control" placeholder="Full Name" maxlength="255"></form:input>
 											                <form:errors path="name"></form:errors>
 														</div>
 				        								</spring:bind>
@@ -156,3 +156,6 @@
             </div>
 		<%@ include file = "footer.jsp" %>
     	<script src="${contextPath}/resources/assets/pages/form-advanced.js"></script>
+    	<script>
+    	$("#createdOn").datepicker();
+    	</script>

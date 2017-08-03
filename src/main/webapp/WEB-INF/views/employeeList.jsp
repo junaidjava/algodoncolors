@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>User List - Algodon</title>
+    <title>Employees List - Algodon</title>
     
    		<%@ include file = "header.jsp" %>
 
@@ -39,7 +39,7 @@
             <div class="content">
                 <div class="">
                     <div class="page-header-title">
-                        <h4 class="page-title">User List</h4></div>
+                        <h4 class="page-title">Employees List</h4></div>
                 </div>
                 <div class="page-content-wrapper ">
 					<div class="container">
@@ -49,7 +49,7 @@
 									<div class="panel-body">
 										<div class="row m-b-15">
 											<div class="col-sm-12 text-right">
-												<a href="${contextPath}/employee-setup" class="btn btn-success">Add User</a>
+												<a href="${contextPath}/employee-setup" class="btn btn-success">Add Employee</a>
 											</div>
 										</div>
 										
@@ -59,8 +59,8 @@
 										    		<thead>
 										      			<tr>
 										        			<th>Username</th>
-										        			<th>FirstName</th>
-										        			<th>LastName</th>
+										        			<th>First Name</th>
+										        			<th>Last Name</th>
 										        			<th>Email</th>
 										        			<th>Status</th>
 										     			 </tr>

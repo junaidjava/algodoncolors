@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Add User - Algodon</title>
+    <title>Add Employee - Algodon</title>
     
 <%@ include file = "header.jsp" %>
         <div class="left side-menu">
@@ -41,7 +41,7 @@
             <div class="content">
                 <div class="">
                     <div class="page-header-title">
-                        <h4 class="page-title">Employee Info</h4></div>
+                        <h4 class="page-title">Add Employee</h4></div>
                 </div>
                 <div class="page-content-wrapper ">
                     <div class="container">
@@ -61,25 +61,14 @@
 													<div class="col-md-6">
 														<div class="form-group">
 															<label class="control-label">First Name</label>
-												            <form:input type="text" path="firstName" class="form-control" maxlength="255"></form:input>
+												            <form:input type="text" path="firstName" class="form-control" placeholder="First Name" maxlength="255"></form:input>
 														</div>
 													</div>
 													<!--/span-->
 													<div class="col-md-6">
 														<div class="form-group">
 															<label class="control-label">Last Name</label>
-												            <form:input type="text" path="lastName" class="form-control" maxlength="255"></form:input>
-														</div>
-													</div>
-													<!--/span-->
-												</div>
-												<!--/row-->
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-check">
-															<label class="form-check-label">
-													            <form:checkbox path="active" class="form-check-input" value="${active}" label="Active"></form:checkbox>
-													        </label>
+												            <form:input type="text" path="lastName" class="form-control" placeholder="Last Name" maxlength="255"></form:input>
 														</div>
 													</div>
 													<!--/span-->
@@ -120,11 +109,22 @@
 												        <spring:bind path="passwordConfirm">
 														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<label class="control-label">Confirm Password</label>
-											                <form:input type="password" path="passwordConfirm" class="form-control" placeholder="Confirm your password" maxlength="60"></form:input>
+											                <form:input type="password" path="passwordConfirm" class="form-control" placeholder="Confirm password" maxlength="60"></form:input>
 											                <form:errors path="passwordConfirm"></form:errors>
 														</div>
 				        								</spring:bind>
 													</div>
+												</div>
+												<!--/row-->
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="form-check-label">
+													            <form:checkbox path="active" class="form-check-input" value="${active}" label="Active"></form:checkbox>
+													        </label>
+														</div>
+													</div>
+													<!--/span-->
 												</div>
 												<!--/row-->
 											</div>

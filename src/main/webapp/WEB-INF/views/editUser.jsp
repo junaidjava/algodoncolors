@@ -72,12 +72,6 @@
 														</div>
 													</div>
 													<!--/span-->
-													<div class="col-md-6">
-														<div class="form-group">
-															<form:checkbox path="active" value="${active}" label="Active"></form:checkbox>
-														</div>
-													</div>
-													<!--/span-->
 												</div>
 												<!--/row-->
 												<div class="row">
@@ -121,6 +115,17 @@
 														</div>
 				        								</spring:bind>
 													</div>
+												</div>
+												<!--/row-->
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="form-check-label">
+																<form:checkbox path="active" class="form-check-input" value="${active}" label="Active"></form:checkbox>
+													        </label>
+														</div>
+													</div>
+													<!--/span-->
 												</div>
 												<!--/row-->
 											</div>

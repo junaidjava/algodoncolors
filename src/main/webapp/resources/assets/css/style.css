@@ -1797,6 +1797,15 @@ File: Components
 .checkbox-success input[type="checkbox"]:checked + label::after {
   color: #ffffff;
 }
+.form-check {
+	margin-top: 34px;
+}
+.form-check-label label {
+  vertical-align: top;
+}
+.form-check-label .form-check-input {
+  margin-right: 5px;
+}
 .radio {
   padding-left: 20px;
 }
