@@ -5,11 +5,11 @@ CREATE DATABASE  IF NOT EXISTS `db_algodon`;
 USE `db_algodon`;
 
 -- User creation and grant permission
-CREATE USER 'junaid'@'localhost' IDENTIFIED BY 'junaid';
-GRANT ALL ON db_algodon.* TO 'junaid'@'localhost';
+CREATE USER 'imran'@'localhost' IDENTIFIED BY 'imran';
+GRANT ALL ON db_algodon.* TO 'imran'@'localhost';
 
 -- conect with user junaid
-mysql -ujunaid -pjunaid -hlocalhost db_algodon
+mysql -uimran -piy -hlocalhost db_algodon
 
 -- Table structure for table `role`
 DROP TABLE IF EXISTS `role`;
@@ -67,6 +67,61 @@ CREATE TABLE `buyer` (
   UNIQUE INDEX `name_UNIQUE` (`name` ASC)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-    
 DROP TABLE IF EXISTS `supplier`;
-CREATE TABLE `supplier` LIKE `buyer`;     
+CREATE TABLE `supplier` LIKE `buyer`;
+
+DROP TABLE IF EXISTS `item_group`;
+CREATE TABLE `item_group` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
+  `name` varchar(255) NOT NULL,
+  `measurementUnit` varchar(100) NOT NULL,
+  `active` BIT(1) DEFAULT true,
+  `createdOn` DATETIME NOT NULL ,
+  `updatedOn` DATETIME NOT NULL ,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
+  `ancNo` varchar(255) NOT NULL,
+  `orderNo` varchar(255) NOT NULL,
+  `category` varchar(255) NOT NULL,
+  `tackPack` varchar(500),  
+  `buyerId` BIGINT(20) NOT NULL,
+  `wash_std` BIT(1) DEFAULT true,
+  `swatch` BIT(1) DEFAULT true,
+  `styleNo` varchar(255) NOT NULL,
+  `fabricDesc` varchar(500) NOT NULL,  
+  `itemDesc` varchar(1000),
+  `collection` varchar(255) NOT NULL,
+  `remarks` varchar(255),
+  `itemGroupId` BIGINT(20) NOT NULL,
+  `size` varchar(2000) NOT NULL,
+  `productLabel` varchar(1000),
+  `sampleType` varchar(255),
+  `weight` varchar(255) NOT NULL,
+  `packing`  varchar(255),
+  `shipmentDate` DATETIME NOT NULL,
+  `shipmentMode` varchar(100) NOT NULL,
+  `createdOn` DATETIME NOT NULL ,
+  `updatedOn` DATETIME NOT NULL ,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `ancNo_UNIQUE` (`ancNo` ASC),
+  UNIQUE INDEX `orderNo_UNIQUE` (`orderNo` ASC),
+  CONSTRAINT `fk_order_buyerId` FOREIGN KEY (`buyerId`) REFERENCES `buyer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_order_itemGroupId` FOREIGN KEY (`itemGroupId`) REFERENCES `item_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE  
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+    
+DROP TABLE IF EXISTS `order_picture`;
+CREATE TABLE `order_picture` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
+  `orderId` BIGINT(20) NOT NULL,
+  `label` varchar(255) NOT NULL,
+  `path` varchar(255) NOT NULL,
+  `createdOn` DATETIME NOT NULL ,
+  `updatedOn` DATETIME NOT NULL ,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_order_picture_orderId` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
