@@ -107,8 +107,8 @@
 			});
 		});
 		
-		$('#size').val(JSON.stringify(sizeData));
-		//$('#orderForm').submit();	
+		$('#size').val(escape(JSON.stringify(sizeData)));
+		$('#orderForm').submit();	
 	}
 </script>
 <title>Order Entry - Algodon</title>
@@ -146,8 +146,8 @@
 							Buyer Setup </span></a></li>
 				<li><a href="${contextPath}/supplier-list" class="waves-effect"><span>
 							Supplier Setup </span></a></li>
-				<li><a href="${contextPath}/order-entry" class="waves-effect"><span>
-							Order Entry </span></a></li>
+				<li><a href="${contextPath}/order-list" class="waves-effect"><span>
+							Orders </span></a></li>
 			</ul>
 		</div>
 		<div class="clearfix"></div>
@@ -176,7 +176,6 @@
 								<form:form id="orderForm" action="${contextPath}/order-entry"
 									modelAttribute="order" class="horizontal-form" method="post">
 									<form:input path="id" type="hidden"></form:input>
-									<form:input path="size" type="hidden"></form:input>
 									<div class="form-body">
 										<div class="row">
 											<div class="col-md-6">
@@ -236,7 +235,7 @@
 													<div class="form-group ${status.error ? 'has-error' : ''}">
 														<label class="control-label">Buyer</label>
 														<form:select path="buyer.id">
-										    				<form:options items="${buyers}" />
+										    				<form:options items="${buyers}" itemValue="id" itemLabel="name"/>
 														</form:select>
 														<form:errors path="buyer.id"></form:errors>
 													</div>
@@ -326,7 +325,7 @@
 													<div class="form-group ${status.error ? 'has-error' : ''}">
 														<label class="control-label">Item Group</label>
 														<form:select path="itemGroup.id">
-										    				<form:options items="${itemGroups}" />
+										    				<form:options items="${itemGroups}"  itemValue="id" itemLabel="name"/>
 														</form:select>
 														<form:errors path="itemGroup.id"></form:errors>
 													</div>
@@ -361,12 +360,16 @@
 										<!--/row-->
 										<div class="row">
 											<div class="col-sm-12">
-												<table id="sizeinput"
-													class="table table-striped table-bordered dataTable no-footer">
-													<tr>
-														<td />
-													</tr>
-												</table>
+												<div class="form-group ${status.error ? 'has-error' : ''}">
+													<form:input path="size" type="hidden"></form:input>
+													<form:errors path="size"></form:errors>
+													<table id="sizeinput"
+														class="table table-striped table-bordered dataTable no-footer">
+														<tr>
+															<td />
+														</tr>
+													</table>
+												</div>
 											</div>
 										</div>
 										<div class="row">
@@ -431,7 +434,7 @@
 									<div class="form-actions">
 										<div class="row">
 											<div class="col-md-12 text-right">
-												<input type="button" class="btn btn-primary" onclick="submitForm();">Save</button>
+												<input type="button" class="btn btn-primary" onclick="submitForm();" value="Save"/>
 											</div>
 										</div>
 									</div>
@@ -446,26 +449,24 @@
 	<%@ include file="footer.jsp"%>
 	<script src="${contextPath}/resources/assets/pages/form-advanced.js"></script>
 	<script>	
-		var size ='<c:out value="${order.size}"/>';
-		alert(size);
+		var size = unescape('<c:out value="${order.size}"/>');
 		var sizeData = JSON.parse(size);
 		
-		var selectedSizes = [];
-		if($('#measurementSize').val().length > 0) {
+		if(sizeData.measurementSize && sizeData.measurementSize.length > 0) {
 			$('#measurementSize').val(sizeData.measurementSize.join(','));
-			selectedSizes = $('#measurementSize').val();
+			$('#measurementSize').change();
 		}
-		var selectedCategories = [];
-		if($('#measurementCategory').val().length > 0) {
+
+		if(sizeData.measurementCategory && sizeData.measurementCategory.length > 0) {
 			$('#measurementCategory').val(sizeData.measurementCategory.join(','));
-			selectedCategories = $('#measurementCategory').val();
+			$('#measurementCategory').change();
 		}
-		
-		updateTable();
-		
-		selectedSizes.forEach(function(selectedSize) {
-			selectedCategories.forEach(function(selectedCategory) {
-				$('#'+selectedSize+'_'+selectedCategory).val(sizeData.data[selectedSize+'_'+selectedCategory]);
-			});
-		});		
+
+		if(sizeData.measurementCategory && sizeData.measurementSize) {
+			sizeData.measurementSize.forEach(function(selectedSize) {
+				sizeData.measurementCategory.forEach(function(selectedCategory) {
+					$('#'+selectedSize+'_'+selectedCategory).val(sizeData.data[selectedSize+'_'+selectedCategory]);
+				});
+			});		
+		}			
 	</script>

@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "order_picture")
+@Table(name = "algodon_order_picture")
 public class OrderPicture implements Serializable {
 	private static final long serialVersionUID = -4890789267333642651L;
 	@Id

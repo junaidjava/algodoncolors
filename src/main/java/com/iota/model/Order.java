@@ -9,12 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "order")
+@Table(name = "algodon_order")
 public class Order implements Serializable {
 	private static final long serialVersionUID = 6901996741501149509L;
 
@@ -26,6 +27,7 @@ public class Order implements Serializable {
 	private String category;
 	private String tackPack;
 	@ManyToOne
+	@JoinColumn(name="buyerId")
 	private Buyer buyer;
 	private Boolean washStandard;
 	private Boolean swatch;
@@ -35,6 +37,7 @@ public class Order implements Serializable {
 	private String collection;
 	private String remarks;
 	@ManyToOne
+	@JoinColumn(name="itemGroupId")
 	private ItemGroup itemGroup;
 	private String size;
 	private String productLabel;

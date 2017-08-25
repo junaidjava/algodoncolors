@@ -82,8 +82,8 @@ CREATE TABLE `item_group` (
   UNIQUE INDEX `name_UNIQUE` (`name` ASC)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `order`;
-CREATE TABLE `order` (
+DROP TABLE IF EXISTS algodon_order;
+CREATE TABLE algodon_order (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
   `ancNo` varchar(255) NOT NULL,
   `orderNo` varchar(255) NOT NULL,
@@ -114,8 +114,8 @@ CREATE TABLE `order` (
   CONSTRAINT `fk_order_itemGroupId` FOREIGN KEY (`itemGroupId`) REFERENCES `item_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE  
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
     
-DROP TABLE IF EXISTS `order_picture`;
-CREATE TABLE `order_picture` (
+DROP TABLE IF EXISTS `algodon_order_picture`;
+CREATE TABLE `algodon_order_picture` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
   `orderId` BIGINT(20) NOT NULL,
   `label` varchar(255) NOT NULL,
@@ -123,5 +123,5 @@ CREATE TABLE `order_picture` (
   `createdOn` DATETIME NOT NULL ,
   `updatedOn` DATETIME NOT NULL ,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_order_picture_orderId` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_order_picture_orderId` FOREIGN KEY (`orderId`) REFERENCES `algodon_order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

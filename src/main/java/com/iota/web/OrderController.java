@@ -1,5 +1,7 @@
 package com.iota.web;
 
+import java.util.Calendar;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +11,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.iota.model.Order;
+import com.iota.repository.BuyerRepository;
+import com.iota.repository.ItemGroupRepository;
 import com.iota.repository.OrderRepository;
+import com.iota.validator.OrderValidator;
 
 @Controller
 public class OrderController {
@@ -20,16 +26,45 @@ public class OrderController {
 	@Autowired
 	private OrderRepository orderRepository;
 
+	@Autowired
+	private OrderValidator orderValidator;
+	
+	@Autowired
+	private BuyerRepository buyerRepository;
+
+	@Autowired
+	private ItemGroupRepository itemGroupRepository;
+
 	@RequestMapping(value = "/order-entry", method = RequestMethod.GET)
 	public String createOrder(Model model) {
 		Order order = new Order();
-		order.setSize("{\"data\":{\"Small_Sleeve\":\"15\"},\"measurementSize\":[\"Small\"],\"measurementCategory\":[\"Sleeve\"]}");
 		model.addAttribute("order", order);
+		model.addAttribute("buyers", buyerRepository.findAll());
+		model.addAttribute("itemGroups", itemGroupRepository.findAll());
 		return "order";
 	}
 
 	@RequestMapping(value = "/order-entry", method = RequestMethod.POST)
 	public String createOrder(@ModelAttribute("order") Order order, BindingResult bindingResult, Model model) {
+		if (order.getId() == null) {
+			order.setCreatedOn(Calendar.getInstance().getTime());
+			order.setUpdatedOn(order.getCreatedOn());
+			order.setShipmentDate(order.getCreatedOn());
+		} else {
+			Order oldOrder = orderRepository.findOne(order.getId());
+			order.setCreatedOn(oldOrder.getCreatedOn());
+			order.setShipmentDate(oldOrder.getShipmentDate());
+			order.setUpdatedOn(Calendar.getInstance().getTime());
+		}
+
+    	/*orderValidator.validate(order, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+    		model.addAttribute("buyers", buyerRepository.findAll());
+    		model.addAttribute("itemGroups", itemGroupRepository.findAll());
+            return "order";
+        }*/
+
 		orderRepository.save(order);
 		logger.debug(String.format("Order # %s entered successfully!", order.getOrderNo()));
 
@@ -40,5 +75,14 @@ public class OrderController {
 	public String getOrderList(Model model) {
 		model.addAttribute("orderList", orderRepository.findAll());
 		return "orderList";
+	}
+
+	@RequestMapping(value = "/edit-order", method = RequestMethod.GET)
+	public String editOrder(@RequestParam("id") Long id, Model model) {
+		Order order = orderRepository.findOne(id);
+		model.addAttribute("order", order);
+		model.addAttribute("buyers", buyerRepository.findAll());
+		model.addAttribute("itemGroups", itemGroupRepository.findAll());
+		return "order";
 	}
 }

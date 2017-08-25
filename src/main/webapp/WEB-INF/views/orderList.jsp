@@ -41,8 +41,9 @@
 							Employee Setup </span></a></li>
 				<li><a href="${contextPath}/buyer-list" class="waves-effect"><span>
 							Buyer Setup </span></a></li>
-				<li><a href="#" class="waves-effect"><span> Supplier
-							Setup </span></a></li>
+                        <li> <a href="${contextPath}/supplier-list" class="waves-effect"><span> Supplier Setup </span></a></li>
+				<li><a href="#" class="waves-effect"><span>
+							Orders </span></a></li>							
 			</ul>
 		</div>
 		<div class="clearfix"></div>
@@ -63,7 +64,7 @@
 							<div class="panel-body">
 								<div class="row m-b-15">
 									<div class="col-sm-12 text-right">
-										<a href="${contextPath}/supplier-setup"
+										<a href="${contextPath}/order-entry"
 											class="btn btn-success">Create Order</a>
 									</div>
 								</div>
@@ -74,19 +75,22 @@
 											class="table table-striped table-bordered dataTable no-footer">
 											<thead>
 												<tr>
-													<th>Order #</th>
 													<th>ANC #</th>
+													<th>Order #</th>
 													<th>Buyer</th>
+													<th>Item</th>
+													<th>Collection</th>
 													<th>Created On</th>
 												</tr>
 											</thead>
 											<tbody>
 												<c:forEach items="${orderList}" var="order">
 													<tr>
-														<td><a
-															href="${contextPath}/edit-order?uid=${order.id}">${order.name}</a></td>
-														<td>${order.ancNo}</td>
+														<td><a href="${contextPath}/edit-order?id=${order.id}">${order.ancNo}</a></td>
+														<td>${order.orderNo}</td>
 														<td>${order.buyer.name}</td>
+														<td>${order.itemDesc}</td>
+														<td>${order.collection}</td>
 														<td><fmt:formatDate pattern="MM-dd-yyyy"
 																value="${order.createdOn}" /></td>
 													</tr>
