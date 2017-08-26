@@ -9,7 +9,7 @@ CREATE USER 'imran'@'localhost' IDENTIFIED BY 'imran';
 GRANT ALL ON db_algodon.* TO 'imran'@'localhost';
 
 -- conect with user junaid
-mysql -uimran -piy -hlocalhost db_algodon
+mysql -ujunaid -pjunaid -hlocalhost db_algodon
 
 -- Table structure for table `role`
 DROP TABLE IF EXISTS `role`;
@@ -81,6 +81,8 @@ CREATE TABLE `item_group` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+INSERT INTO `item_group` VALUES (1,'Item-Group1','cm',1,now(),now());
+INSERT INTO `item_group` VALUES (2,'Item-Group2','inch',1,now(),now());
 
 DROP TABLE IF EXISTS algodon_order;
 CREATE TABLE algodon_order (
