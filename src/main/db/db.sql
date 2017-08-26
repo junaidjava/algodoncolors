@@ -5,8 +5,8 @@ CREATE DATABASE  IF NOT EXISTS `db_algodon`;
 USE `db_algodon`;
 
 -- User creation and grant permission
-CREATE USER 'imran'@'localhost' IDENTIFIED BY 'imran';
-GRANT ALL ON db_algodon.* TO 'imran'@'localhost';
+CREATE USER 'junaid'@'localhost' IDENTIFIED BY 'junaid';
+GRANT ALL ON db_algodon.* TO 'junaid'@'localhost';
 
 -- conect with user junaid
 mysql -ujunaid -pjunaid -hlocalhost db_algodon
