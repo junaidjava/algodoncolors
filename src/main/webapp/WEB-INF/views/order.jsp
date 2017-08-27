@@ -208,9 +208,9 @@
 													<div class="form-group ${status.error ? 'has-error' : ''}">
 														<label class="control-label">Category</label>
 														<form:select path="category">
-															<option>Trouser</option>
-															<option>Formal Shirt</option>
-															<option>Casual Shirt</option>
+															<option <c:if test="${order.category == 'Trouser'}">selected="selected"</c:if>>Trouser</option>
+															<option <c:if test="${order.category == 'Formal Shirt'}">selected="selected"</c:if>>Formal Shirt</option>
+															<option <c:if test="${order.category == 'Casual Shirt'}">selected="selected"</c:if>>Casual Shirt</option>
 														</form:select>
 														<form:errors path="category"></form:errors>
 													</div>
@@ -409,25 +409,30 @@
 												</spring:bind>
 											</div>
 											<div class="col-md-6">
-												<div class="form-group">
-													<label class="control-label">Shipment Date</label>
-													<div class="input-group">
-														<form:input path="shipmentDate" class="form-control" placeholder="mm/dd/yyyy" type="date" ></form:input>
-                                                  		<span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
-                                                  	</div>
-												</div>
-												<div class="col-md-6">
-													<spring:bind path="shipmentMode">
-														<div class="form-group ${status.error ? 'has-error' : ''}">
-															<label class="control-label">Shipment Mode</label>
-															<form:select path="shipmentMode">
-																<option>By Sea</option>
-																<option>By Air</option>
-															</form:select>
-															<form:errors path="shipmentMode"></form:errors>
+												<spring:bind path="shipmentDate">
+													<div class="form-group ${status.error ? 'has-error' : ''}">
+														<label class="control-label">Shipment Date</label>
+														<div class="input-group">
+															<fmt:formatDate value="${order.shipmentDate}" pattern="MM/dd/yyyy" var="shipmentDateStr"/>
+															<form:input type="text" class="form-control" path="shipmentDate" value="${shipmentDateStr}" readonly="true"></form:input>
+															<form:errors path="shipmentDate"></form:errors>
 														</div>
-													</spring:bind>
-												</div>
+	                                          		</div>
+	                                          	</spring:bind>
+                                       		</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<spring:bind path="shipmentMode">
+													<div class="form-group ${status.error ? 'has-error' : ''}">
+														<label class="control-label">Shipment Mode</label>
+														<form:select path="shipmentMode">
+															<option <c:if test="${order.shipmentMode == 'By Sea'}">selected="selected"</c:if>>By Sea</option>
+															<option <c:if test="${order.shipmentMode == 'By Air'}">selected="selected"</c:if>>By Air</option>
+														</form:select>
+														<form:errors path="shipmentMode"></form:errors>
+													</div>
+												</spring:bind>
 											</div>
 										</div>
 									</div>
@@ -449,6 +454,8 @@
 	<%@ include file="footer.jsp"%>
 	<script src="${contextPath}/resources/assets/pages/form-advanced.js"></script>
 	<script>	
+		$('#shipmentDate').datepicker();
+	
 		var size = unescape('<c:out value="${order.size}"/>');
 		var sizeData = JSON.parse(size);
 		
