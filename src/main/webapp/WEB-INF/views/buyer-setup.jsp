@@ -1,6 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -71,14 +72,17 @@
 													</div>
 													<!--/span-->
 													<div class="col-md-6">
-														<div class="form-group">
-															<label class="control-label">Start Date<span class="required" aria-required="true"> * </span></label>
-															<div class="input-group">
-																<form:input path="createdOn" class="form-control" placeholder="mm/dd/yyyy" type="date" ></form:input>
-                                                           		<span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
-                                                           	</div>
-														</div>
-													</div>
+														<spring:bind path="createdOn">
+															<div class="form-group ${status.error ? 'has-error' : ''}">
+																<label class="control-label">Start Date</label>
+																<div class="input-group">
+																	<fmt:formatDate value="${buyerForm.createdOn}" pattern="MM/dd/yyyy" var="createdOnStr"/>
+																	<form:input type="text" class="form-control" path="createdOn" value="${createdOnStr}" readonly="true"></form:input>
+																	<form:errors path="createdOn"></form:errors>
+																</div>
+			                                          		</div>
+			                                          	</spring:bind>
+		                                       		</div>
 													<!--/span-->
 												</div>
 												<!--/row-->
