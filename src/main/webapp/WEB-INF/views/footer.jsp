@@ -20,6 +20,7 @@
     <script src="${contextPath}/resources/assets/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
     <script src="${contextPath}/resources/assets/plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js" type="text/javascript"></script>
     <script src="${contextPath}/resources/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js" type="text/javascript"></script>
+    <script src="${contextPath}/resources/assets/plugins/bootstrap-filestyle/js/bootstrap-filestyle.min.js" type="text/javascript"></script>
     
     <script src="${contextPath}/resources/assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="${contextPath}/resources/assets/plugins/datatables/dataTables.bootstrap.js"></script>

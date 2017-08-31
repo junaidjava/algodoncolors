@@ -77,6 +77,7 @@
 																<div class="input-group">
 																	<fmt:formatDate value="${supplierForm.createdOn}" pattern="MM/dd/yyyy" var="createdOnStr"/>
 																	<form:input type="text" class="form-control" path="createdOn" value="${createdOnStr}" readonly="true"></form:input>
+																	<span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
 																	<form:errors path="createdOn"></form:errors>
 																</div>
 			                                          		</div>

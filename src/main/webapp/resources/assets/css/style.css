@@ -258,7 +258,8 @@ a:focus {
 .text-dark {
   color: #2a323c !important;
 }
-.form-control {
+.form-control,
+.bootstrap-tagsinput {
   -moz-border-radius: 2px;
   -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   -webkit-border-radius: 2px;
@@ -271,11 +272,27 @@ a:focus {
   color: rgba(0, 0, 0, 0.6);
   font-size: 14px;
 }
-.form-control:focus {
+.form-control:focus,
+.bootstrap-tagsinput {
   background: #ffffff;
   border: 1px solid #e0e0e0;
   box-shadow: none;
 }
+.bootstrap-tagsinput{
+  display:block!important;
+  -moz-border-radius: 2px!important;
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1)!important;
+  -webkit-border-radius: 2px!important;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1)!important;
+  background-color: #fafafa!important;
+  border-radius: 2px!important;
+  border: 1px solid #eeeeee!important;
+  box-shadow: none!important;
+  height: 38px!important;
+  color: rgba(0, 0, 0, 0.6)!important;
+  font-size: 14px!important;
+}
+
 .input-lg {
   height: 46px;
   padding: 10px 16px;
@@ -1798,7 +1815,7 @@ File: Components
   color: #ffffff;
 }
 .form-check {
-	margin-top: 34px;
+  margin-top: 34px;
 }
 .form-check-label label {
   vertical-align: top;

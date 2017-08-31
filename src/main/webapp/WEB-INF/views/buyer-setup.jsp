@@ -47,7 +47,6 @@
                 <div class="page-content-wrapper ">
                     <div class="container">
                         <div class="row">
-                        <div class="row">
                         	<div class="col-sm-12">
 						        <form id="logoutForm" method="POST" action="${contextPath}/logout">
 						            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -78,6 +77,7 @@
 																<div class="input-group">
 																	<fmt:formatDate value="${buyerForm.createdOn}" pattern="MM/dd/yyyy" var="createdOnStr"/>
 																	<form:input type="text" class="form-control" path="createdOn" value="${createdOnStr}" readonly="true"></form:input>
+																	<span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
 																	<form:errors path="createdOn"></form:errors>
 																</div>
 			                                          		</div>
@@ -155,10 +155,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    	</div>
+                	</div>
+            	</div>
 		<%@ include file = "footer.jsp" %>
     	<script src="${contextPath}/resources/assets/pages/form-advanced.js"></script>
     	<script>

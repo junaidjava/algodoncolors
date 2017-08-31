@@ -208,7 +208,7 @@
 												<spring:bind path="category">
 													<div class="form-group ${status.error ? 'has-error' : ''}">
 														<label class="control-label">Category</label>
-														<form:select path="category">
+														<form:select path="category" class="form-control">
 															<option <c:if test="${order.category == 'Trouser'}">selected="selected"</c:if>>Trouser</option>
 															<option <c:if test="${order.category == 'Formal Shirt'}">selected="selected"</c:if>>Formal Shirt</option>
 															<option <c:if test="${order.category == 'Casual Shirt'}">selected="selected"</c:if>>Casual Shirt</option>
@@ -223,7 +223,7 @@
 													<div class="form-group ${status.error ? 'has-error' : ''}">
 														<label class="control-label">Tack Pack</label>
 														<form:input id="input-1" path="tackPack" type="file"
-															class="file" />
+															class="file filestyle" />
 														<form:errors path="tackPack"></form:errors>
 													</div>
 												</spring:bind>
@@ -235,7 +235,7 @@
 												<spring:bind path="buyer.id">
 													<div class="form-group ${status.error ? 'has-error' : ''}">
 														<label class="control-label">Buyer</label>
-														<form:select path="buyer.id">
+														<form:select path="buyer.id" class="form-control">
 										    				<form:options items="${buyers}" itemValue="id" itemLabel="name"/>
 														</form:select>
 														<form:errors path="buyer.id"></form:errors>
@@ -243,23 +243,6 @@
 												</spring:bind>
 											</div>
 											<!--/span-->
-											<div class="col-md-6">
-												<div class="form-check">
-													<label class="form-check-label">
-											            <form:checkbox path="washStandard" class="form-check-input" value="${washStandard}" label="Wash Standard"></form:checkbox>
-											        </label>
-												</div>
-											</div>
-											<!--/span-->
-										</div>
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-check">
-													<label class="form-check-label">
-											            <form:checkbox path="swatch" class="form-check-input" value="${swatch}" label="Swatch"></form:checkbox>
-											        </label>
-												</div>
-											</div>
 											<div class="col-md-6">
 												<spring:bind path="styleNo">
 													<div class="form-group ${status.error ? 'has-error' : ''}">
@@ -271,6 +254,23 @@
 													</div>
 												</spring:bind>
 											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-check1 m-t-10 m-b-10">
+													<label class="form-check-label">
+											            <form:checkbox path="swatch" class="form-check-input" value="${swatch}" label="Swatch"></form:checkbox>
+											        </label>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-check1 m-t-10 m-b-10">
+													<label class="form-check-label">
+											            <form:checkbox path="washStandard" class="form-check-input" value="${washStandard}" label="Wash Standard"></form:checkbox>
+											        </label>
+												</div>
+											</div>
+											<!--/span-->
 										</div>
 										<div class="row">
 											<div class="col-md-6">
@@ -325,7 +325,7 @@
 												<spring:bind path="itemGroup.id">
 													<div class="form-group ${status.error ? 'has-error' : ''}">
 														<label class="control-label">Item Group</label>
-														<form:select path="itemGroup.id">
+														<form:select path="itemGroup.id" class="form-control">
 										    				<form:options items="${itemGroups}"  itemValue="id" itemLabel="name"/>
 														</form:select>
 														<form:errors path="itemGroup.id"></form:errors>
@@ -416,6 +416,7 @@
 														<div class="input-group">
 															<fmt:formatDate value="${order.shipmentDate}" pattern="MM/dd/yyyy" var="shipmentDateStr"/>
 															<form:input type="text" class="form-control" path="shipmentDate" value="${shipmentDateStr}" readonly="true"></form:input>
+															<span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
 															<form:errors path="shipmentDate"></form:errors>
 														</div>
 	                                          		</div>
@@ -427,7 +428,7 @@
 												<spring:bind path="shipmentMode">
 													<div class="form-group ${status.error ? 'has-error' : ''}">
 														<label class="control-label">Shipment Mode</label>
-														<form:select path="shipmentMode">
+														<form:select path="shipmentMode" class="form-control">
 															<option <c:if test="${order.shipmentMode == 'By Sea'}">selected="selected"</c:if>>By Sea</option>
 															<option <c:if test="${order.shipmentMode == 'By Air'}">selected="selected"</c:if>>By Air</option>
 														</form:select>
