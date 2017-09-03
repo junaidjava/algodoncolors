@@ -127,3 +127,5 @@ CREATE TABLE `algodon_order_picture` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_order_picture_orderId` FOREIGN KEY (`orderId`) REFERENCES `algodon_order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+ALTER table algodon_order ADD COLUMN `color` varchar(500) NOT NULL AFTER `fabricDesc`;

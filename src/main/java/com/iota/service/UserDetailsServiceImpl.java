@@ -1,8 +1,8 @@
 package com.iota.service;
 
-import com.iota.model.Role;
-import com.iota.model.User;
-import com.iota.repository.UserRepository;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,8 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Set;
+import com.iota.model.Role;
+import com.iota.model.User;
+import com.iota.repository.UserRepository;
 
 public class UserDetailsServiceImpl implements UserDetailsService{
     @Autowired

@@ -33,6 +33,7 @@ public class Order implements Serializable {
 	private Boolean swatch;
 	private String styleNo;
 	private String fabricDesc;
+	private String color;
 	private String itemDesc;
 	private String collection;
 	private String remarks;
@@ -145,6 +146,14 @@ public class Order implements Serializable {
 
 	public void setFabricDesc(String fabricDesc) {
 		this.fabricDesc = fabricDesc;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	public String getItemDesc() {
