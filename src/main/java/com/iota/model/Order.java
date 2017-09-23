@@ -81,7 +81,10 @@ public class Order implements Serializable {
 	}
 
 	public void setAncNo(String ancNo) {
-		this.ancNo = ancNo;
+		if(ancNo!=null)
+			this.ancNo = ancNo.trim();
+		else
+			this.ancNo = ancNo;
 	}
 
 	public String getOrderNo() {
@@ -89,7 +92,10 @@ public class Order implements Serializable {
 	}
 
 	public void setOrderNo(String orderNo) {
-		this.orderNo = orderNo;
+		if(orderNo!=null) 
+			this.orderNo = orderNo.trim();
+		else	
+			this.orderNo = orderNo;
 	}
 
 	public String getCategory() {
@@ -137,7 +143,10 @@ public class Order implements Serializable {
 	}
 
 	public void setStyleNo(String styleNo) {
-		this.styleNo = styleNo;
+		if(styleNo!=null)
+			this.styleNo = styleNo.trim();
+		else	
+			this.styleNo = styleNo;
 	}
 
 	public String getFabricDesc() {
@@ -145,7 +154,10 @@ public class Order implements Serializable {
 	}
 
 	public void setFabricDesc(String fabricDesc) {
-		this.fabricDesc = fabricDesc;
+		if(fabricDesc!=null)
+			this.fabricDesc = fabricDesc.trim();
+		else	
+			this.fabricDesc = fabricDesc;
 	}
 
 	public String getColor() {
@@ -161,7 +173,10 @@ public class Order implements Serializable {
 	}
 
 	public void setItemDesc(String itemDesc) {
-		this.itemDesc = itemDesc;
+		if(itemDesc!=null)
+			this.itemDesc = itemDesc.trim();
+		else
+			this.itemDesc = itemDesc;
 	}
 
 	public String getCollection() {
@@ -169,7 +184,10 @@ public class Order implements Serializable {
 	}
 
 	public void setCollection(String collection) {
-		this.collection = collection;
+		if(collection!=null)
+			this.collection = collection.trim();
+		else
+			this.collection = collection;
 	}
 
 	public String getRemarks() {
@@ -177,7 +195,10 @@ public class Order implements Serializable {
 	}
 
 	public void setRemarks(String remarks) {
-		this.remarks = remarks;
+		if(remarks!=null)
+			this.remarks = remarks.trim();
+		else
+			this.remarks = remarks;
 	}
 
 	public ItemGroup getItemGroup() {
@@ -201,7 +222,10 @@ public class Order implements Serializable {
 	}
 
 	public void setProductLabel(String productLabel) {
-		this.productLabel = productLabel;
+		if(productLabel!=null)
+			this.productLabel = productLabel.trim();
+		else
+			this.productLabel = productLabel;
 	}
 
 	public String getSampleType() {
@@ -209,7 +233,10 @@ public class Order implements Serializable {
 	}
 
 	public void setSampleType(String sampleType) {
-		this.sampleType = sampleType;
+		if(sampleType!=null)
+			this.sampleType = sampleType.trim();
+		else
+			this.sampleType = sampleType;
 	}
 
 	public String getWeight() {
@@ -217,7 +244,10 @@ public class Order implements Serializable {
 	}
 
 	public void setWeight(String weight) {
-		this.weight = weight;
+		if(weight!=null)
+			this.weight = weight.trim();
+		else
+			this.weight = weight;
 	}
 
 	public String getPacking() {

@@ -98,15 +98,9 @@ public class OrderController {
 		}
 
         if (!tackPackFile.isEmpty()) {
-			final File mainFolder = new File(tackpackFileStoragePath);
-			if(!mainFolder.exists()) {
-				mainFolder.mkdirs();
-			}
-			final File orderFolder = new File(mainFolder, order.getOrderNo());
-			if(!orderFolder.exists()) {
-				orderFolder.mkdirs();
-			}
-			final File file = new File(orderFolder, tackPackFile.getOriginalFilename());
+			final File mainFolder = new File(tackpackFileStoragePath+ "/" + order.getOrderNo());
+			mainFolder.mkdirs();
+			final File file = new File(mainFolder, tackPackFile.getOriginalFilename());
 			if (!file.exists()) {
 				file.createNewFile();
 			}

@@ -208,6 +208,7 @@
 													<div class="required form-group ${status.error ? 'has-error' : ''}">
 														<label class="control-label">Category</label>
 														<form:select path="category" class="form-control">
+															<option <c:if test="${order.category == 'Jeans'}">selected="selected"</c:if>>Jeans</option>
 															<option <c:if test="${order.category == 'Trouser'}">selected="selected"</c:if>>Trouser</option>
 															<option <c:if test="${order.category == 'Formal Shirt'}">selected="selected"</c:if>>Formal Shirt</option>
 															<option <c:if test="${order.category == 'Casual Shirt'}">selected="selected"</c:if>>Casual Shirt</option>

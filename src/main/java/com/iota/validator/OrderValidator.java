@@ -19,28 +19,32 @@ public class OrderValidator implements Validator {
 	public void validate(Object o, Errors errors) {
 		Order order = (Order) o;
 
-		if (order.getAncNo()==null || order.getAncNo().length() < 6 || order.getAncNo().length() > 255) {
-			errors.rejectValue("ancNo", "size.order.field.255");
+		if (order.getAncNo()==null || order.getAncNo().length() ==0 ) {
+			errors.rejectValue("ancNo", "NotEmpty");
+		}else if (order.getAncNo().length() > 255) {
+			errors.rejectValue("ancNo", "max.char.allowed"+" "+order.getAncNo().length());
 		}
 
-		if (order.getOrderNo()==null || order.getOrderNo().length() < 6 || order.getOrderNo().length() > 255) {
-			errors.rejectValue("orderNo", "size.order.field.255");
+		if (order.getOrderNo()==null || order.getOrderNo().length() == 0) {
+			errors.rejectValue("orderNo", "NotEmpty");
+		}else if (order.getOrderNo().length() > 255) {
+			errors.rejectValue("orderNo", "max.char.allowed"+" "+order.getOrderNo().length());
 		}
-
-		if (order.getCategory()==null  || order.getCategory().length() < 6 || order.getCategory().length() > 255) {
-			errors.rejectValue("category", "size.order.field.255");
-		}
-
+		
 		if (order.getBuyer() == null || order.getBuyer().getId() == null) {
 			errors.rejectValue("buyer.id", "NotEmpty");
 		}
 
-		if (order.getStyleNo()==null || order.getStyleNo().length() < 6 || order.getStyleNo().length() > 255) {
-			errors.rejectValue("styleNo", "size.order.field.255");
+		if (order.getStyleNo()==null || order.getStyleNo().length() ==0 ) {
+			errors.rejectValue("styleNo", "NotEmpty");
+		}else if (order.getStyleNo().length() > 255) {
+			errors.rejectValue("styleNo", "max.char.allowed"+" "+order.getStyleNo().length());
 		}
 
-		if (order.getFabricDesc()==null || order.getFabricDesc().length() < 6 || order.getFabricDesc().length() > 1000) {
-			errors.rejectValue("fabricDesc", "size.order.field.1000");
+		if (order.getFabricDesc()==null || order.getFabricDesc().length() ==0) {
+			errors.rejectValue("fabricDesc", "NotEmpty");
+		}else if (order.getFabricDesc().length() > 1000) {
+			errors.rejectValue("fabricDesc", "max.char.allowed"+" "+order.getFabricDesc().length());
 		}
 
 		if (order.getCollection()==null || order.getCollection().length() < 6 || order.getCollection().length() > 255) {
@@ -53,6 +57,11 @@ public class OrderValidator implements Validator {
 
 		if (order.getWeight()==null || order.getWeight().length() < 6 || order.getWeight().length() > 255) {
 			errors.rejectValue("weight", "size.order.field.255");
+		}
+		if (order.getWeight()==null || order.getWeight().length() ==0 ) {
+			errors.rejectValue("weight", "NotEmpty");
+		}else if (order.getWeight().length() > 255) {
+			errors.rejectValue("weight", "max.char.allowed"+" "+order.getWeight().length());
 		}
 
 		if (order.getShipmentMode() == null || order.getShipmentMode().isEmpty()) {
