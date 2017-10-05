@@ -138,18 +138,7 @@
 				</p>
 			</div>
 		</div>
-		<div id="sidebar-menu">
-			<ul>
-				<li><a href="${contextPath}/employee-list" class="waves-effect"><span>
-							Employee Setup </span></a></li>
-				<li><a href="${contextPath}/buyer-list" class="waves-effect"><span>
-							Buyer Setup </span></a></li>
-				<li><a href="${contextPath}/supplier-list" class="waves-effect"><span>
-							Supplier Setup </span></a></li>
-				<li><a href="${contextPath}/order-list" class="waves-effect"><span>
-							Orders </span></a></li>
-			</ul>
-		</div>
+		<%@ include file = "sidebarMenu.jsp" %>
 		<div class="clearfix"></div>
 	</div>
 </div>
@@ -204,37 +193,6 @@
 										</div>
 										<div class="row">
 											<div class="col-md-6">
-												<spring:bind path="category">
-													<div class="required form-group ${status.error ? 'has-error' : ''}">
-														<label class="control-label">Category</label>
-														<form:select path="category" class="form-control">
-															<option <c:if test="${order.category == 'Jeans'}">selected="selected"</c:if>>Jeans</option>
-															<option <c:if test="${order.category == 'Trouser'}">selected="selected"</c:if>>Trouser</option>
-															<option <c:if test="${order.category == 'Formal Shirt'}">selected="selected"</c:if>>Formal Shirt</option>
-															<option <c:if test="${order.category == 'Casual Shirt'}">selected="selected"</c:if>>Casual Shirt</option>
-														</form:select>
-														<form:errors path="category"></form:errors>
-													</div>
-												</spring:bind>
-											</div>
-											<!--/span-->
-											<div class="col-md-6">
-												<div class="form-group">
-													<label class="control-label">Tack Pack</label>
-													<input id="tackPackFile" name="tackPackFile" type="file" class="file filestyle"/>
-													<form:input path="tackPack" type="hidden"></form:input>
-													<div id="tackPackFileDisplay">
-														<a href="order/tackpack/${order.id}" >${order.tackPack}</a>
-														<button type="button" class="close" aria-label="Close" onclick="showTackPackFileControl();">
-														  <span aria-hidden="true">&times;</span>
-														</button>
-													</div>
-												</div>
-											</div>
-											<!--/span-->
-										</div>
-										<div class="row">
-											<div class="col-md-6">
 												<spring:bind path="buyer.id">
 													<div class="required form-group ${status.error ? 'has-error' : ''}">
 														<label class="control-label">Buyer</label>
@@ -244,6 +202,20 @@
 														<form:errors path="buyer.id"></form:errors>
 													</div>
 												</spring:bind>
+											</div>
+											<!--/span-->
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Tech Pack</label>
+													<input id="techPackFile" name="techPackFile" type="file" class="file filestyle"/>
+													<form:input path="techPack" type="hidden"></form:input>
+													<div id="techPackFileDisplay">
+														<a href="order/techpack/${order.id}" >${order.techPack}</a>
+														<button type="button" class="close" aria-label="Close" onclick="showTechPackFileControl();">
+														  <span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+												</div>
 											</div>
 										</div>
 										<br>
@@ -262,22 +234,6 @@
 														</spring:bind>
 													</div>
 													<div class="col-md-6">
-														<div class="form-check1 m-t-10 m-b-10">
-															<label class="form-check-label">
-													            <form:checkbox path="swatch" class="form-check-input" value="${swatch}" label="Swatch"></form:checkbox>
-													        </label>
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-check1 m-t-10 m-b-10">
-															<label class="form-check-label">
-													            <form:checkbox path="washStandard" class="form-check-input" value="${washStandard}" label="Wash Standard"></form:checkbox>
-													        </label>
-														</div>
-													</div>
-													<div class="col-md-6">
 														<spring:bind path="fabricDesc">
 															<div class="required form-group ${status.error ? 'has-error' : ''}">
 																<label class="control-label">Fabric Description </label>
@@ -291,15 +247,11 @@
 												</div>
 												<div class="row">
 													<div class="col-md-6">
-														<spring:bind path="color">
-															<div class="required form-group ${status.error ? 'has-error' : ''}">
-																<label class="control-label">Color</label>
-																<form:input type="text" path="color"
-																	class="form-control" maxlength="500" 
-																	data-role="tagsinput"></form:input>
-																<form:errors path="color"></form:errors>
-															</div>
-														</spring:bind>
+														<div class="form-check1 m-t-10 m-b-10">
+															<label class="form-check-label">
+													            <form:checkbox path="washStandard" class="form-check-input" value="${washStandard}" label="Wash Standard"></form:checkbox>
+													        </label>
+														</div>
 													</div>
 													<div class="col-md-6">
 														<spring:bind path="itemDesc">
@@ -309,6 +261,26 @@
 																	class="form-control" placeholder="Item Description"
 																	maxlength="1000"></form:input>
 																<form:errors path="itemDesc"></form:errors>
+															</div>
+														</spring:bind>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-check1 m-t-10 m-b-10">
+															<label class="form-check-label">
+													            <form:checkbox path="swatch" class="form-check-input" value="${swatch}" label="Swatch"></form:checkbox>
+													        </label>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<spring:bind path="color">
+															<div class="required form-group ${status.error ? 'has-error' : ''}">
+																<label class="control-label">Color</label>
+																<form:input type="text" path="color"
+																	class="form-control" maxlength="500" 
+																	data-role="tagsinput"></form:input>
+																<form:errors path="color"></form:errors>
 															</div>
 														</spring:bind>
 													</div>
@@ -475,32 +447,32 @@
 	<%@ include file="footer.jsp"%>
 	<script src="${contextPath}/resources/assets/pages/form-advanced.js"></script>
 	<script>	
-		function showTackPackFileControl() {
-			$('#tackPack').val(null);
-			$('#tackPackFile').filestyle();		
-			$('#tackPackFileDisplay').hide();			
-			$('#tackPackFile').show();			
+		function showTechPackFileControl() {
+			$('#techPack').val(null);
+			$('#techPackFile').filestyle();		
+			$('#techPackFileDisplay').hide();			
+			$('#techPackFile').show();			
 		}
 	
-		function hideTackPackFileControl() {
-			$('#tackPackFile').removeClass('filestyle');			
-			$('#tackPackFileDisplay').show();			
-			$('#tackPackFile').hide();			
+		function hideTechPackFileControl() {
+			$('#techPackFile').removeClass('filestyle');			
+			$('#techPackFileDisplay').show();			
+			$('#techPackFile').hide();			
 		}
 
 		$('#shipmentDate').datepicker();
 
-		var tackPack = '<c:out value="${order.tackPack}"/>';
-		if(tackPack.length > 0) {
-			hideTackPackFileControl();
+		var techPack = '<c:out value="${order.techPack}"/>';
+		if(techPack.length > 0) {
+			hideTechPackFileControl();
 		}
 		else {
-			showTackPackFileControl();
+			showTechPackFileControl();
 		}
 		
 		var size = unescape('<c:out value="${order.size}"/>');
 		var sizeData = JSON.parse(size);
-		
+		console.log(sizeData);
 		if(sizeData.measurementSize && sizeData.measurementSize.length > 0) {
 			$('#measurementSize').val(sizeData.measurementSize.join(','));
 			$('#measurementSize').change();

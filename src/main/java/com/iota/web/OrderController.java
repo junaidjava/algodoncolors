@@ -52,8 +52,8 @@ public class OrderController {
 	@Autowired
 	private ItemGroupRepository itemGroupRepository;
 
-	@Value(value = "${order.tack.pack.file.path}")
-	private String tackpackFileStoragePath;
+	@Value(value = "${order.tech.pack.file.path}")
+	private String techpackFileStoragePath;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -73,7 +73,7 @@ public class OrderController {
 
 	@RequestMapping(value = "/order-entry", method = RequestMethod.POST)
 	public String createOrder(@ModelAttribute("order") Order order,
-			@RequestParam(name = "tackPackFile") MultipartFile tackPackFile, BindingResult bindingResult, Model model)
+			@RequestParam(name = "techPackFile") MultipartFile techPackFile, BindingResult bindingResult, Model model)
 			throws IllegalStateException, IOException {
 		if (order.getId() == null) {
 			order.setCreatedOn(Calendar.getInstance().getTime());
@@ -83,8 +83,8 @@ public class OrderController {
 			order.setCreatedOn(oldOrder.getCreatedOn());
 			order.setUpdatedOn(Calendar.getInstance().getTime());
 
-			if(oldOrder.getTackPack()!=null && !oldOrder.getTackPack().equals(order.getTackPack())) {
-				final File file = new File(tackpackFileStoragePath + "/" + order.getOrderNo() + "/" + oldOrder.getTackPack());
+			if(oldOrder.getTechPack()!=null && !oldOrder.getTechPack().equals(order.getTechPack())) {
+				final File file = new File(techpackFileStoragePath + "/" + order.getOrderNo() + "/" + oldOrder.getTechPack());
 				file.delete();
 			}
 		}
@@ -97,15 +97,15 @@ public class OrderController {
 			return "order";
 		}
 
-        if (!tackPackFile.isEmpty()) {
-			final File mainFolder = new File(tackpackFileStoragePath+ "/" + order.getOrderNo());
+        if (!techPackFile.isEmpty()) {
+			final File mainFolder = new File(techpackFileStoragePath+ "/" + order.getOrderNo());
 			mainFolder.mkdirs();
-			final File file = new File(mainFolder, tackPackFile.getOriginalFilename());
+			final File file = new File(mainFolder, techPackFile.getOriginalFilename());
 			if (!file.exists()) {
 				file.createNewFile();
 			}
-			tackPackFile.transferTo(file);
-			order.setTackPack(tackPackFile.getOriginalFilename());
+			techPackFile.transferTo(file);
+			order.setTechPack(techPackFile.getOriginalFilename());
 		}
 		orderRepository.save(order);
 		logger.debug(String.format("Order # %s entered successfully!", order.getOrderNo()));
@@ -113,11 +113,11 @@ public class OrderController {
 		return "redirect:/order-list";
 	}
 
-	@RequestMapping(value = "/order/tackpack/{orderId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/order/techpack/{orderId}", method = RequestMethod.GET)
 	public void getFile(@PathVariable("orderId") Long orderId, HttpServletResponse response) {
 		try {
 			Order order = orderRepository.findOne(orderId);
-			final File file = new File(tackpackFileStoragePath + "/" + order.getOrderNo() + "/" + order.getTackPack());
+			final File file = new File(techpackFileStoragePath + "/" + order.getOrderNo() + "/" + order.getTechPack());
 			String mimeType = URLConnection.guessContentTypeFromName(file.getName());
 			if (mimeType == null) {
 				System.out.println("mimetype is not detectable, will take default");
@@ -129,7 +129,7 @@ public class OrderController {
 			InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
 			FileCopyUtils.copy(inputStream, response.getOutputStream());
 		} catch (IOException ex) {
-			logger.error("Error writing tackpack", ex);
+			logger.error("Error writing techpack", ex);
 		}
 	}
 

@@ -24,8 +24,7 @@ public class Order implements Serializable {
 	private Long id;
 	private String ancNo;
 	private String orderNo;
-	private String category;
-	private String tackPack;
+	private String techPack;
 	@ManyToOne
 	@JoinColumn(name="buyerId")
 	private Buyer buyer;
@@ -98,20 +97,12 @@ public class Order implements Serializable {
 			this.orderNo = orderNo;
 	}
 
-	public String getCategory() {
-		return category;
+	public String getTechPack() {
+		return techPack;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	public String getTackPack() {
-		return tackPack;
-	}
-
-	public void setTackPack(String tackPack) {
-		this.tackPack = tackPack;
+	public void setTechPack(String techPack) {
+		this.techPack = techPack;
 	}
 
 	public Buyer getBuyer() {
