@@ -86,13 +86,13 @@ INSERT INTO `item_group` VALUES (2,'Trouser','cm',1,now(),now());
 INSERT INTO `item_group` VALUES (3,'Formal Shirt','inch',1,now(),now());
 INSERT INTO `item_group` VALUES (4,'Casual Shirt','inch',1,now(),now());
 
+  
 DROP TABLE IF EXISTS algodon_order;
 CREATE TABLE algodon_order (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
   `ancNo` varchar(255) NOT NULL,
   `orderNo` varchar(255) NOT NULL,
-  `category` varchar(255) NOT NULL,
-  `tackPack` varchar(500),  
+  `techPack` varchar(500),  
   `buyerId` BIGINT(20) NOT NULL,
   `washStandard` BIT(1) DEFAULT true,
   `swatch` BIT(1) DEFAULT true,
@@ -104,7 +104,7 @@ CREATE TABLE algodon_order (
   `remarks` varchar(255),
   `itemGroupId` BIGINT(20) NOT NULL,
   `size` varchar(2000) NOT NULL,
-  `productLabel` varchar(1000),
+  `productLabel` varchar(255),
   `sampleType` varchar(255),
   `weight` varchar(255) NOT NULL,
   `packing`  varchar(255),
@@ -118,7 +118,7 @@ CREATE TABLE algodon_order (
   CONSTRAINT `fk_order_buyerId` FOREIGN KEY (`buyerId`) REFERENCES `buyer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_order_itemGroupId` FOREIGN KEY (`itemGroupId`) REFERENCES `item_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE  
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-    
+
 DROP TABLE IF EXISTS `algodon_order_picture`;
 CREATE TABLE `algodon_order_picture` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
@@ -131,3 +131,6 @@ CREATE TABLE `algodon_order_picture` (
   CONSTRAINT `fk_order_picture_orderId` FOREIGN KEY (`orderId`) REFERENCES `algodon_order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `algodon_order_picture`;
+ALTER TABLE algodon_order DROP COLUMN category;
+ALTER TABLE algodon_order CHANGE tackPack techPack varchar(500);
