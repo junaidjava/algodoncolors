@@ -83,7 +83,7 @@ public class BuyerController {
                 model.addAttribute("buyerForm", selectedBuyer);
 
 			} catch (NumberFormatException nfe) {
-		        logger.error(nfe.getMessage(),nfe.getStackTrace());
+		        logger.error(nfe.getMessage(),nfe);
 			}
     	}
 

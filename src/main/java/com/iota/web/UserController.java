@@ -113,7 +113,7 @@ public class UserController {
                 model.addAttribute("userForm", selectedUser);
 
 			} catch (NumberFormatException nfe) {
-		        logger.error(nfe.getMessage(),nfe.getStackTrace());
+		        logger.error(nfe.getMessage(),nfe);
 			}
     	}
 

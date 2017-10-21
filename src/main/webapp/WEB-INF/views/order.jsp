@@ -13,11 +13,11 @@
 	var categoryRows = [];
 
 	function updateTable() {
-		var table = $('#sizeinput');
-		var tableRows = $('#sizeinput tr');
+		var table = $('#matrix');
+		var tableRows = $('#matrix tr');
 
-		var tableColumnRow = $('#sizeinput tr:first');
-		var tableRows = $('#sizeinput tr');
+		var tableColumnRow = $('#matrix tr:first');
+		var tableRows = $('#matrix tr');
 		var tableColumns = $(tableColumnRow).find('td');
 		var selectedSizes = [];
 		if($('#measurementSize').val().length > 0) {
@@ -335,26 +335,14 @@
 												</div>
 												<div class="row">
 													<div class="col-md-6">
-														<spring:bind path="sampleType">
-															<div class="form-group ${status.error ? 'has-error' : ''}">
-																<label class="control-label">Sample Type</label>
-																<form:input type="text" path="sampleType"
-																	class="form-control" placeholder="Sample Type"
-																	maxlength="255"></form:input>
-																<form:errors path="sampleType"></form:errors>
-															</div>
-														</spring:bind>
+
 													</div>
 													<div class="col-md-6">
-														<spring:bind path="weight">
-															<div class="required form-group ${status.error ? 'has-error' : ''}">
-																<label class="control-label">Weight</label>
-																<form:input type="text" path="weight"
-																	class="form-control" placeholder="Weight"
-																	maxlength="255"></form:input>
-																<form:errors path="weight"></form:errors>
-															</div>
-														</spring:bind>
+														<div class="form-check1 m-t-10 m-b-10">
+															<label class="form-check-label">
+													            <form:checkbox path="sample" class="form-check-input" value="${sample}" label="Sample"></form:checkbox>
+													        </label>
+														</div>
 													</div>
 												</div>
 												<div class="row">
@@ -374,7 +362,7 @@
 														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<form:input path="size" type="hidden"></form:input>
 															<form:errors path="size"></form:errors>
-															<table id="sizeinput"
+															<table id="matrix"
 																class="table table-striped table-bordered dataTable no-footer">
 																<tr>
 																	<td />
@@ -385,15 +373,7 @@
 												</div>
 												<div class="row">
 													<div class="col-md-6">
-														<spring:bind path="packing">
-															<div class="form-group ${status.error ? 'has-error' : ''}">
-																<label class="control-label">Packing</label>
-																<form:input type="text" path="packing"
-																	class="form-control" placeholder="Packing"
-																	maxlength="255"></form:input>
-																<form:errors path="packing"></form:errors>
-															</div>
-														</spring:bind>
+
 													</div>
 												</div>
 											</fieldset>

@@ -41,11 +41,9 @@ public class Order implements Serializable {
 	private ItemGroup itemGroup;
 	private String size;
 	private String productLabel;
-	private String sampleType;
-	private String weight;
-	private String packing;
 	private Date shipmentDate;
 	private String shipmentMode;
+	private Boolean sample;
 	@OneToMany(mappedBy = "order")
 	private List<OrderPicture> orderPictures = new ArrayList<OrderPicture>();
 	private Date createdOn;
@@ -219,36 +217,6 @@ public class Order implements Serializable {
 			this.productLabel = productLabel;
 	}
 
-	public String getSampleType() {
-		return sampleType;
-	}
-
-	public void setSampleType(String sampleType) {
-		if(sampleType!=null)
-			this.sampleType = sampleType.trim();
-		else
-			this.sampleType = sampleType;
-	}
-
-	public String getWeight() {
-		return weight;
-	}
-
-	public void setWeight(String weight) {
-		if(weight!=null)
-			this.weight = weight.trim();
-		else
-			this.weight = weight;
-	}
-
-	public String getPacking() {
-		return packing;
-	}
-
-	public void setPacking(String packing) {
-		this.packing = packing;
-	}
-
 	public Date getShipmentDate() {
 		return shipmentDate;
 	}
@@ -263,5 +231,13 @@ public class Order implements Serializable {
 
 	public void setShipmentMode(String shipmentMode) {
 		this.shipmentMode = shipmentMode;
+	}
+
+	public Boolean getSample() {
+		return sample;
+	}
+
+	public void setSample(Boolean sample) {
+		this.sample = sample;
 	}
 }

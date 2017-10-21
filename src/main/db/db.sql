@@ -93,6 +93,8 @@ CREATE TABLE algodon_order (
   `ancNo` varchar(255) NOT NULL,
   `orderNo` varchar(255) NOT NULL,
   `techPack` varchar(500),  
+  `techPack2` varchar(500),  
+  `techPack3` varchar(500),  
   `buyerId` BIGINT(20) NOT NULL,
   `washStandard` BIT(1) DEFAULT true,
   `swatch` BIT(1) DEFAULT true,
@@ -105,11 +107,13 @@ CREATE TABLE algodon_order (
   `itemGroupId` BIGINT(20) NOT NULL,
   `size` varchar(2000) NOT NULL,
   `productLabel` varchar(255),
-  `sampleType` varchar(255),
-  `weight` varchar(255) NOT NULL,
-  `packing`  varchar(255),
   `shipmentDate` DATETIME NOT NULL,
+  `shipmentDate2` DATETIME NOT NULL,
+  `shipmentDate3` DATETIME NOT NULL,
   `shipmentMode` varchar(100) NOT NULL,
+  `shipmentMode2` varchar(100) NOT NULL,
+  `shipmentMode3` varchar(100) NOT NULL,
+  `sample` BIT(1) DEFAULT false,
   `createdOn` DATETIME NOT NULL ,
   `updatedOn` DATETIME NOT NULL ,
   PRIMARY KEY (`id`),
@@ -134,3 +138,13 @@ CREATE TABLE `algodon_order_picture` (
 DROP TABLE IF EXISTS `algodon_order_picture`;
 ALTER TABLE algodon_order DROP COLUMN category;
 ALTER TABLE algodon_order CHANGE tackPack techPack varchar(500);
+-- dated 21-oct-2017
+ALTER TABLE algodon_order DROP COLUMN `sampleType` ;
+ALTER TABLE algodon_order DROP COLUMN `weight` ;
+ALTER TABLE algodon_order DROP COLUMN `packing` ;
+
+ALTER TABLE algodon_order ADD COLUMN `techPack2` varchar(500) AFTER `techPack`;
+ALTER TABLE algodon_order ADD COLUMN `techPack3` varchar(500) AFTER `techPack2`;
+ALTER TABLE algodon_order ADD COLUMN `shipmentMode2` varchar(100) AFTER `shipmentMode`;
+ALTER TABLE algodon_order ADD COLUMN `shipmentMode3` varchar(100) AFTER `shipmentMode2`;
+ALTER TABLE algodon_order ADD COLUMN `sample` BIT(1) DEFAULT false AFTER `shipmentMode3`;

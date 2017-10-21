@@ -2,7 +2,6 @@ package com.iota.validator;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.iota.model.Order;
@@ -53,15 +52,6 @@ public class OrderValidator implements Validator {
 
 		if (order.getItemGroup() == null || order.getItemGroup().getId() == null) {
 			errors.rejectValue("itemGroup.id", "NotEmpty");
-		}
-
-		if (order.getWeight()==null || order.getWeight().length() < 6 || order.getWeight().length() > 255) {
-			errors.rejectValue("weight", "size.order.field.255");
-		}
-		if (order.getWeight()==null || order.getWeight().length() ==0 ) {
-			errors.rejectValue("weight", "NotEmpty");
-		}else if (order.getWeight().length() > 255) {
-			errors.rejectValue("weight", "max.char.allowed"+" "+order.getWeight().length());
 		}
 
 		if (order.getShipmentMode() == null || order.getShipmentMode().isEmpty()) {

@@ -84,7 +84,7 @@ public class SupplierController {
                 model.addAttribute("supplierForm", selectedSupplier);
 
 			} catch (NumberFormatException nfe) {
-		        logger.error(nfe.getMessage(),nfe.getStackTrace());
+		        logger.error(nfe.getMessage(),nfe);
 			}
     	}
 
