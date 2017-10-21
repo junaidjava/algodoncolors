@@ -9,107 +9,123 @@
 <html>
 <head>
 <script type="text/javascript">
-	var sizeColumns = [];
-	var categoryRows = [];
+var firstRowData = [];
+var firstColData = [];
 
-	function updateTable() {
-		var table = $('#matrix');
-		var tableRows = $('#matrix tr');
+function updateTable() {
+	var table = $('#matrix');
+	var firstRow = $('#matrix tr:first');
+	var tableRows = $('#matrix tr');
+	var firstColumn = $(firstRow).find('td');
+	var inputForFirstRow = [];
+	if($('#measurementSize').val().length > 0) {
+		inputForFirstRow = $('#measurementSize').val().split(',');
+	}
 
-		var tableColumnRow = $('#matrix tr:first');
-		var tableRows = $('#matrix tr');
-		var tableColumns = $(tableColumnRow).find('td');
-		var selectedSizes = [];
-		if($('#measurementSize').val().length > 0) {
-			selectedSizes = $('#measurementSize').val().split(',');
+	// if user wanna DELETE a column
+	firstRowData.forEach(function(cell_0xC_data) {
+		var colIndex = inputForFirstRow.indexOf(cell_0xC_data);
+		if (colIndex < 0) {
+			//remove this column from UI
+			$('.' + cell_0xC_data).remove();
+			//also remove this column from firstRowData array
+			firstRowData.splice(colIndex, 1);
 		}
-		var selectedCategories = [];
-		if($('#measurementCategory').val().length > 0) {
-			selectedCategories = $('#measurementCategory').val().split(',');
-		}
+	});
 
-		sizeColumns.forEach(function(sizeColumn) {
-			var index = selectedSizes.indexOf(sizeColumn);
-			if (index < 0) {
-				$('.' + sizeColumn).remove();
-				sizeColumns.splice(index, 1);
+	// if user wanna ADD a column
+	if (inputForFirstRow) {
+		inputForFirstRow.forEach(function(selectedSize) {
+			if (firstRowData.indexOf(selectedSize) < 0) {
+				firstRow.append('<td class='+selectedSize+'>'
+						+ selectedSize + '</td>');
+				firstRowData.push(selectedSize);
+				tableRows.each(function(rowIndex) {
+					if (rowIndex > 0) {
+						var tds = $(this).find('td');
+						$(this).append(
+								'<td class="' + selectedSize + ' '
+										+ $(tds[0]).text()
+										+ '"><input type="text" id="'
+										+ selectedSize + '_'
+										+ $(tds[0]).text() + '"/></td>');
+					}
+				});
 			}
 		});
+	}
 
-		if (selectedSizes) {
-			selectedSizes.forEach(function(selectedSize) {
-				if (sizeColumns.indexOf(selectedSize) < 0) {
-					tableColumnRow.append('<td class='+selectedSize+'>'
-							+ selectedSize + '</td>');
-					sizeColumns.push(selectedSize);
-					tableRows.each(function(index) {
-						if (index > 0) {
-							var tds = $(this).find('td');
-							$(this).append(
-									'<td class="' + selectedSize + ' '
-											+ $(tds[0]).text()
-											+ '"><input type="text" id="'
-											+ selectedSize + '_'
-											+ $(tds[0]).text() + '"/></td>');
-						}
-					});
-				}
-			});
+	var inputForFirstCol = [];
+	if($('#measurementCategory').val().length > 0) {
+		inputForFirstCol = $('#measurementCategory').val().split(',');
+	}
+	// Adding colour input into list
+	if($('#styleColor').val().length > 0) {
+		inputForFirstCol=inputForFirstCol.concat($('#styleColor').val().split(','));
+	}
+
+	
+	// if user wanna DELETE a row
+	firstColData.forEach(function(cell_Rx0_data) {
+		var rowIndex = inputForFirstCol.indexOf(cell_Rx0_data);
+		if (rowIndex < 0) {
+			$('.' + cell_Rx0_data).remove();
+			firstColData.splice(rowIndex, 1);
 		}
-
-		categoryRows.forEach(function(categoryRow) {
-			var index = selectedCategories.indexOf(categoryRow);
-			if (index < 0) {
-				$('.' + categoryRow).remove();
-				categoryRows.splice(index, 1);
+	});
+	// if user wanna ADD a row
+	if (inputForFirstCol) {
+		inputForFirstCol.forEach(function(selectedCategory) {
+			if (firstColData.indexOf(selectedCategory) < 0) {
+				table.append('<tr class='+selectedCategory+'><td>'
+						+ selectedCategory + '</td></tr>');
+				firstColData.push(selectedCategory);
+				var row = $('.' + selectedCategory)
+				firstColumn.each(function(index) {
+					if (index > 0) {
+						row.append('<td class="' + selectedCategory + ' '
+								+ $(this).text()
+								+ '"><input type="text" id="'
+								+ $(this).text() + '_' + selectedCategory
+								+ '"/></td>');
+					}
+				});
 			}
 		});
+	}
+}
 
-		if (selectedCategories) {
-			selectedCategories.forEach(function(selectedCategory) {
-				if (categoryRows.indexOf(selectedCategory) < 0) {
-					table.append('<tr class='+selectedCategory+'><td>'
-							+ selectedCategory + '</td></tr>');
-					categoryRows.push(selectedCategory);
-					var row = $('.' + selectedCategory)
-					tableColumns.each(function(index) {
-						if (index > 0) {
-							row.append('<td class="' + selectedCategory + ' '
-									+ $(this).text()
-									+ '"><input type="text" id="'
-									+ $(this).text() + '_' + selectedCategory
-									+ '"/></td>');
-						}
-					});
-				}
-			});
-		}
+function submitForm() {
+	var jsonMatrix = {};
+	jsonMatrix.data = {};
+	
+	var inputForFirstRow = [];
+	if($('#measurementSize').val().length > 0) {
+		inputForFirstRow = $('#measurementSize').val().split(',');
+		jsonMatrix.measurementSize =inputForFirstRow; 
+	}
+	var inputForFirstCol = [];
+	if($('#measurementCategory').val().length > 0) {
+		inputForFirstCol = $('#measurementCategory').val().split(',');
+	}
+	// adding colors data
+	if($('#styleColor').val().length > 0) {
+		inputForFirstCol=inputForFirstCol.concat($('#styleColor').val().split(','));
 	}
 	
-	function submitForm() {
-		var sizeData = {};
-		sizeData.data = {};
-		
-		var selectedSizes = [];
-		if($('#measurementSize').val().length > 0) {
-			selectedSizes = $('#measurementSize').val().split(',');
-			sizeData.measurementSize =selectedSizes; 
-		}
-		var selectedCategories = [];
-		if($('#measurementCategory').val().length > 0) {
-			selectedCategories = $('#measurementCategory').val().split(',');
-			sizeData.measurementCategory =selectedCategories; 
-		}
-		selectedSizes.forEach(function(selectedSize) {
-			selectedCategories.forEach(function(selectedCategory) {
-				var inputElement = $('#'+selectedSize+'_'+selectedCategory);
-				sizeData.data[selectedSize+'_'+selectedCategory] = inputElement.val();
-			});
+	jsonMatrix.measurementCategory =inputForFirstCol; 
+	
+	inputForFirstRow.forEach(function(selectedSize) {
+		inputForFirstCol.forEach(function(selectedCategory) {
+			var inputElement = $('#'+selectedSize+'_'+selectedCategory);
+			jsonMatrix.data[selectedSize+'_'+selectedCategory] = inputElement.val();
 		});
-		
-		$('#size').val(escape(JSON.stringify(sizeData)));
-		$('#orderForm').submit();	
-	}
+	});
+	$('#color').val($('#styleColor').val());
+	$('#size').val(escape(JSON.stringify(jsonMatrix)));
+	$('#orderForm').submit();	
+}
+
 </script>
 <title>Order Entry - Algodon</title>
 <%@ include file="header.jsp"%>
@@ -234,6 +250,26 @@
 														</spring:bind>
 													</div>
 													<div class="col-md-6">
+														<spring:bind path="itemGroup.id">
+															<div class="required form-group ${status.error ? 'has-error' : ''}">
+																<label class="control-label">Item Group</label>
+																<form:select path="itemGroup.id" class="form-control">
+												    				<form:options items="${itemGroups}"  itemValue="id" itemLabel="name"/>
+																</form:select>
+																<form:errors path="itemGroup.id"></form:errors>
+															</div>
+														</spring:bind>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-check1 m-t-10 m-b-10">
+															<label class="form-check-label">
+													            <form:checkbox path="washStandard" class="form-check-input" value="${washStandard}" label="Wash Standard"></form:checkbox>
+													        </label>
+														</div>
+													</div>
+													<div class="col-md-6">
 														<spring:bind path="fabricDesc">
 															<div class="required form-group ${status.error ? 'has-error' : ''}">
 																<label class="control-label">Fabric Description </label>
@@ -249,7 +285,7 @@
 													<div class="col-md-6">
 														<div class="form-check1 m-t-10 m-b-10">
 															<label class="form-check-label">
-													            <form:checkbox path="washStandard" class="form-check-input" value="${washStandard}" label="Wash Standard"></form:checkbox>
+													            <form:checkbox path="swatch" class="form-check-input" value="${swatch}" label="Swatch"></form:checkbox>
 													        </label>
 														</div>
 													</div>
@@ -261,26 +297,6 @@
 																	class="form-control" placeholder="Item Description"
 																	maxlength="1000"></form:input>
 																<form:errors path="itemDesc"></form:errors>
-															</div>
-														</spring:bind>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-check1 m-t-10 m-b-10">
-															<label class="form-check-label">
-													            <form:checkbox path="swatch" class="form-check-input" value="${swatch}" label="Swatch"></form:checkbox>
-													        </label>
-														</div>
-													</div>
-													<div class="col-md-6">
-														<spring:bind path="color">
-															<div class="required form-group ${status.error ? 'has-error' : ''}">
-																<label class="control-label">Color</label>
-																<form:input type="text" path="color"
-																	class="form-control" maxlength="500" 
-																	data-role="tagsinput"></form:input>
-																<form:errors path="color"></form:errors>
 															</div>
 														</spring:bind>
 													</div>
@@ -311,15 +327,10 @@
 												</div>
 												<div class="row">
 													<div class="col-md-6">
-														<spring:bind path="itemGroup.id">
-															<div class="required form-group ${status.error ? 'has-error' : ''}">
-																<label class="control-label">Item Group</label>
-																<form:select path="itemGroup.id" class="form-control">
-												    				<form:options items="${itemGroups}"  itemValue="id" itemLabel="name"/>
-																</form:select>
-																<form:errors path="itemGroup.id"></form:errors>
-															</div>
-														</spring:bind>
+														<div class="form-group">
+															<label class="control-label">Size</label>
+															<input id="measurementSize" type="text" class="form-control" data-role="tagsinput" onchange="updateTable();"/>
+														</div>
 													</div>
 													<div class="col-md-6">
 														<spring:bind path="productLabel">
@@ -335,33 +346,24 @@
 												</div>
 												<div class="row">
 													<div class="col-md-6">
-
-													</div>
-													<div class="col-md-6">
-														<div class="form-check1 m-t-10 m-b-10">
-															<label class="form-check-label">
-													            <form:checkbox path="sample" class="form-check-input" value="${sample}" label="Sample"></form:checkbox>
-													        </label>
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group">
-															<label class="control-label">Size</label>
-															<input id="measurementSize" type="text" class="form-control" data-role="tagsinput" onchange="updateTable();"/>
-														</div>
-													</div>
-													<div class="col-md-6">
 														<div class="form-group">
 															<label class="control-label">Measurement</label> 
 															<input id="measurementCategory" type="text" class="form-control" data-role="tagsinput" onchange="updateTable();"/>
 														</div>
 													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label">Color</label> 
+															<input id="styleColor" type="text" class="form-control" data-role="tagsinput" onchange="updateTable();"/>
+														</div>
+
+													</div>
 													<div class="col-sm-12">
 														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<form:input path="size" type="hidden"></form:input>
 															<form:errors path="size"></form:errors>
+															<form:input path="color" type="hidden"></form:input>
+															<form:errors path="color"></form:errors>
 															<table id="matrix"
 																class="table table-striped table-bordered dataTable no-footer">
 																<tr>
@@ -373,7 +375,11 @@
 												</div>
 												<div class="row">
 													<div class="col-md-6">
-
+														<div class="form-check1 m-t-10 m-b-10">
+															<label class="form-check-label">
+													            <form:checkbox path="sample" class="form-check-input" value="${sample}" label="Sample"></form:checkbox>
+													        </label>
+														</div>
 													</div>
 												</div>
 											</fieldset>
@@ -427,47 +433,60 @@
 	<%@ include file="footer.jsp"%>
 	<script src="${contextPath}/resources/assets/pages/form-advanced.js"></script>
 	<script>	
-		function showTechPackFileControl() {
-			$('#techPack').val(null);
-			$('#techPackFile').filestyle();		
-			$('#techPackFileDisplay').hide();			
-			$('#techPackFile').show();			
-		}
+	var techPack = '<c:out value="${order.techPack}"/>';
+	if(techPack.length > 0) {
+		hideTechPackFileControl();
+	}else {
+		showTechPackFileControl();
+	}
 	
-		function hideTechPackFileControl() {
-			$('#techPackFile').removeClass('filestyle');			
-			$('#techPackFileDisplay').show();			
-			$('#techPackFile').hide();			
-		}
+	function showTechPackFileControl() {
+		$('#techPack').val(null);
+		$('#techPackFile').filestyle();		
+		$('#techPackFileDisplay').hide();			
+		$('#techPackFile').show();			
+	}
 
-		$('#shipmentDate').datepicker();
+	function hideTechPackFileControl() {
+		$('#techPackFile').removeClass('filestyle');			
+		$('#techPackFileDisplay').show();			
+		$('#techPackFile').hide();			
+	}
 
-		var techPack = '<c:out value="${order.techPack}"/>';
-		if(techPack.length > 0) {
-			hideTechPackFileControl();
-		}
-		else {
-			showTechPackFileControl();
-		}
-		
-		var size = unescape('<c:out value="${order.size}"/>');
-		var sizeData = JSON.parse(size);
-		console.log(sizeData);
-		if(sizeData.measurementSize && sizeData.measurementSize.length > 0) {
-			$('#measurementSize').val(sizeData.measurementSize.join(','));
-			$('#measurementSize').change();
-		}
+	$('#shipmentDate').datepicker();
 
-		if(sizeData.measurementCategory && sizeData.measurementCategory.length > 0) {
-			$('#measurementCategory').val(sizeData.measurementCategory.join(','));
-			$('#measurementCategory').change();
-		}
+	var colrs='<c:out value="${order.color}"/>';
+	var jsonMatrix = JSON.parse(unescape('<c:out value="${order.size}"/>'));
+	if(jsonMatrix.measurementSize && jsonMatrix.measurementSize.length > 0) {
+		$('#measurementSize').val(jsonMatrix.measurementSize.join(','));
+		$('#measurementSize').change();
+	}
 
-		if(sizeData.measurementCategory && sizeData.measurementSize) {
-			sizeData.measurementSize.forEach(function(selectedSize) {
-				sizeData.measurementCategory.forEach(function(selectedCategory) {
-					$('#'+selectedSize+'_'+selectedCategory).val(sizeData.data[selectedSize+'_'+selectedCategory]);
-				});
-			});		
-		}			
+	if(jsonMatrix.measurementCategory && jsonMatrix.measurementCategory.length > 0) {
+		var filteredVal="";
+		var currRow=1;
+		jsonMatrix.measurementCategory.forEach(function(selectedCategory) {
+			if (colrs.indexOf(selectedCategory) < 0) {
+				if(currRow > 1){
+					filteredVal+=",";
+				}
+				filteredVal+=selectedCategory;
+				currRow++;
+			}
+			
+		});
+		$('#measurementCategory').val(filteredVal);
+		$('#measurementCategory').change();
+		$('#styleColor').val(colrs);
+		$('#styleColor').change();
+	}
+	
+	if(jsonMatrix.measurementCategory && jsonMatrix.measurementSize) {
+		jsonMatrix.measurementSize.forEach(function(selectedSize) {
+			jsonMatrix.measurementCategory.forEach(function(selectedCategory) {
+				$('#'+selectedSize+'_'+selectedCategory).val(jsonMatrix.data[selectedSize+'_'+selectedCategory]);
+			});
+		});		
+	}			
+
 	</script>
