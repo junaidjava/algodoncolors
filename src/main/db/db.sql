@@ -148,3 +148,7 @@ ALTER TABLE algodon_order ADD COLUMN `techPack3` varchar(500) AFTER `techPack2`;
 ALTER TABLE algodon_order ADD COLUMN `shipmentMode2` varchar(100) AFTER `shipmentMode`;
 ALTER TABLE algodon_order ADD COLUMN `shipmentMode3` varchar(100) AFTER `shipmentMode2`;
 ALTER TABLE algodon_order ADD COLUMN `sample` BIT(1) DEFAULT false AFTER `shipmentMode3`;
+
+ALTER TABLE algodon_order ADD COLUMN `shipmentDate2` DATETIME AFTER `shipmentDate`;
+ALTER TABLE algodon_order ADD COLUMN `shipmentDate3` DATETIME AFTER `shipmentDate2`;
+  

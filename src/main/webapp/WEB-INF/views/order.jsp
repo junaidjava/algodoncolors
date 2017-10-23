@@ -234,6 +234,35 @@ function submitForm() {
 												</div>
 											</div>
 										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Tech Pack2</label>
+													<input id="techPackFile2" name="techPackFile2" type="file" class="file filestyle"/>
+													<form:input path="techPack2" type="hidden"></form:input>
+													<div id="techPackFileDisplay2">
+														<a href="order/techpack2/${order.id}" >${order.techPack2}</a>
+														<button type="button" class="close" aria-label="Close" onclick="showTechPackFileControl2();">
+														  <span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="control-label">Tech Pack3</label>
+													<input id="techPackFile3" name="techPackFile3" type="file" class="file filestyle"/>
+													<form:input path="techPack3" type="hidden"></form:input>
+													<div id="techPackFileDisplay3">
+														<a href="order/techpack3/${order.id}" >${order.techPack3}</a>
+														<button type="button" class="close" aria-label="Close" onclick="showTechPackFileControl3();">
+														  <span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										
 										<br>
 									  	<fieldset>
 											<legend>Style</legend>
@@ -413,6 +442,60 @@ function submitForm() {
 														</spring:bind>
 													</div>
 												</div>
+												<div class="row">
+													<div class="col-md-6">
+														<spring:bind path="shipmentDate2">
+															<div class="required form-group ${status.error ? 'has-error' : ''}">
+																<label class="control-label">Shipment Date2</label>
+																<div class="input-group">
+																	<fmt:formatDate value="${order.shipmentDate2}" pattern="MM/dd/yyyy" var="shipmentDateStr2"/>
+																	<form:input type="text" class="form-control" path="shipmentDate2" value="${shipmentDateStr2}" readonly="true"></form:input>
+																	<span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
+																	<form:errors path="shipmentDate2"></form:errors>
+																</div>
+			                                          		</div>
+			                                          	</spring:bind>
+		                                       		</div>
+													<div class="col-md-6">
+														<spring:bind path="shipmentMode2">
+															<div class="required form-group ${status.error ? 'has-error' : ''}">
+																<label class="control-label">Shipment Mode2</label>
+																<form:select path="shipmentMode2" class="form-control">
+																	<option <c:if test="${order.shipmentMode2 == 'By Sea'}">selected="selected"</c:if>>By Sea</option>
+																	<option <c:if test="${order.shipmentMode2 == 'By Air'}">selected="selected"</c:if>>By Air</option>
+																</form:select>
+																<form:errors path="shipmentMode2"></form:errors>
+															</div>
+														</spring:bind>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-6">
+														<spring:bind path="shipmentDate3">
+															<div class="required form-group ${status.error ? 'has-error' : ''}">
+																<label class="control-label">Shipment Date3</label>
+																<div class="input-group">
+																	<fmt:formatDate value="${order.shipmentDate3}" pattern="MM/dd/yyyy" var="shipmentDateStr3"/>
+																	<form:input type="text" class="form-control" path="shipmentDate3" value="${shipmentDateStr3}" readonly="true"></form:input>
+																	<span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
+																	<form:errors path="shipmentDate3"></form:errors>
+																</div>
+			                                          		</div>
+			                                          	</spring:bind>
+		                                       		</div>
+													<div class="col-md-6">
+														<spring:bind path="shipmentMode3">
+															<div class="required form-group ${status.error ? 'has-error' : ''}">
+																<label class="control-label">Shipment Mode3</label>
+																<form:select path="shipmentMode3" class="form-control">
+																	<option <c:if test="${order.shipmentMode3 == 'By Sea'}">selected="selected"</c:if>>By Sea</option>
+																	<option <c:if test="${order.shipmentMode3 == 'By Air'}">selected="selected"</c:if>>By Air</option>
+																</form:select>
+																<form:errors path="shipmentMode3"></form:errors>
+															</div>
+														</spring:bind>
+													</div>
+												</div>
 											</fieldset>
 									</div>
 									<div class="form-actions">
@@ -453,7 +536,49 @@ function submitForm() {
 		$('#techPackFile').hide();			
 	}
 
+	var techPack2 = '<c:out value="${order.techPack2}"/>';
+	if(techPack2.length > 0) {
+		hideTechPackFileControl2();
+	}else {
+		showTechPackFileControl2();
+	}
+	
+	function showTechPackFileControl2() {
+		$('#techPack2').val(null);
+		$('#techPackFile2').filestyle();		
+		$('#techPackFileDisplay2').hide();			
+		$('#techPackFile2').show();			
+	}
+
+	function hideTechPackFileControl2() {
+		$('#techPackFile2').removeClass('filestyle');			
+		$('#techPackFileDisplay2').show();			
+		$('#techPackFile2').hide();			
+	}
+
+	var techPack3 = '<c:out value="${order.techPack3}"/>';
+	if(techPack3.length > 0) {
+		hideTechPackFileControl3();
+	}else {
+		showTechPackFileControl3();
+	}
+	
+	function showTechPackFileControl3() {
+		$('#techPack3').val(null);
+		$('#techPackFile3').filestyle();		
+		$('#techPackFileDisplay3').hide();			
+		$('#techPackFile3').show();			
+	}
+
+	function hideTechPackFileControl3() {
+		$('#techPackFile3').removeClass('filestyle');			
+		$('#techPackFileDisplay3').show();			
+		$('#techPackFile3').hide();			
+	}
+
 	$('#shipmentDate').datepicker();
+	$('#shipmentDate2').datepicker();
+	$('#shipmentDate3').datepicker();
 
 	var colrs='<c:out value="${order.color}"/>';
 	var jsonMatrix = JSON.parse(unescape('<c:out value="${order.size}"/>'));

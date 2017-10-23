@@ -72,22 +72,11 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/order-entry", method = RequestMethod.POST)
-	public String createOrder(@ModelAttribute("order") Order order,
-			@RequestParam(name = "techPackFile") MultipartFile techPackFile, BindingResult bindingResult, Model model)
-			throws IllegalStateException, IOException {
-		if (order.getId() == null) {
-			order.setCreatedOn(Calendar.getInstance().getTime());
-			order.setUpdatedOn(order.getCreatedOn());
-		} else {
-			Order oldOrder = orderRepository.findOne(order.getId());
-			order.setCreatedOn(oldOrder.getCreatedOn());
-			order.setUpdatedOn(Calendar.getInstance().getTime());
-
-			if(oldOrder.getTechPack()!=null && !oldOrder.getTechPack().equals(order.getTechPack())) {
-				final File file = new File(techpackFileStoragePath + "/" + order.getOrderNo() + "/" + oldOrder.getTechPack());
-				file.delete();
-			}
-		}
+	public String createOrder(@ModelAttribute("order") Order order, BindingResult bindingResult, Model model,
+			@RequestParam(name = "techPackFile") MultipartFile techPackFile,
+			@RequestParam(name = "techPackFile2") MultipartFile techPackFile2,
+			@RequestParam(name = "techPackFile3") MultipartFile techPackFile3
+			)throws IllegalStateException, IOException {
 
 		orderValidator.validate(order, bindingResult);
 
@@ -97,8 +86,39 @@ public class OrderController {
 			return "order";
 		}
 
-        if (!techPackFile.isEmpty()) {
-			final File mainFolder = new File(techpackFileStoragePath+ "/" + order.getOrderNo());
+		if (order.getId() == null) {
+			order.setCreatedOn(Calendar.getInstance().getTime());
+			order.setUpdatedOn(order.getCreatedOn());
+		} else {
+			// update case
+			Order oldOrder = orderRepository.findOne(order.getId());
+			order.setCreatedOn(oldOrder.getCreatedOn());
+			order.setUpdatedOn(Calendar.getInstance().getTime());
+
+			if(oldOrder.getTechPack()!=null && !oldOrder.getTechPack().equals(order.getTechPack())) {
+				final File file = new File(techpackFileStoragePath + "/" + order.getAncNo() + "/" + oldOrder.getTechPack());
+				file.delete();
+			}
+			if(oldOrder.getTechPack2()!=null && !oldOrder.getTechPack2().equals(order.getTechPack2())) {
+				final File file = new File(techpackFileStoragePath + "/" + order.getAncNo() + "/" + oldOrder.getTechPack2());
+				file.delete();
+			}
+			if(oldOrder.getTechPack3()!=null && !oldOrder.getTechPack3().equals(order.getTechPack3())) {
+				final File file = new File(techpackFileStoragePath + "/" + order.getAncNo() + "/" + oldOrder.getTechPack3());
+				file.delete();
+			}
+		}
+		saveFiles(techPackFile,techPackFile2,techPackFile3,order);
+		orderRepository.save(order);
+		logger.debug("Order {} successfully saved", order.getAncNo());
+
+		return "redirect:/order-list";
+	}
+
+	private void saveFiles(MultipartFile techPackFile,MultipartFile techPackFile2,MultipartFile techPackFile3,Order order) throws IOException {
+		final String folderPath=techpackFileStoragePath+ "/" + order.getAncNo();
+		if (!techPackFile.isEmpty()) {
+			final File mainFolder = new File(folderPath);
 			mainFolder.mkdirs();
 			final File file = new File(mainFolder, techPackFile.getOriginalFilename());
 			if (!file.exists()) {
@@ -107,17 +127,31 @@ public class OrderController {
 			techPackFile.transferTo(file);
 			order.setTechPack(techPackFile.getOriginalFilename());
 		}
-		orderRepository.save(order);
-		logger.debug(String.format("Order # %s entered successfully!", order.getOrderNo()));
+		
+        if (!techPackFile2.isEmpty()) {
+			final File file = new File(folderPath, techPackFile2.getOriginalFilename());
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			techPackFile2.transferTo(file);
+			order.setTechPack2(techPackFile2.getOriginalFilename());
+		}
 
-		return "redirect:/order-list";
+        if (!techPackFile3.isEmpty()) {
+			final File file = new File(folderPath, techPackFile3.getOriginalFilename());
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			techPackFile3.transferTo(file);
+			order.setTechPack3(techPackFile3.getOriginalFilename());
+		}
 	}
 
 	@RequestMapping(value = "/order/techpack/{orderId}", method = RequestMethod.GET)
 	public void getFile(@PathVariable("orderId") Long orderId, HttpServletResponse response) {
 		try {
 			Order order = orderRepository.findOne(orderId);
-			final File file = new File(techpackFileStoragePath + "/" + order.getOrderNo() + "/" + order.getTechPack());
+			final File file = new File(techpackFileStoragePath + "/" + order.getAncNo() + "/" + order.getTechPack());
 			String mimeType = URLConnection.guessContentTypeFromName(file.getName());
 			if (mimeType == null) {
 				System.out.println("mimetype is not detectable, will take default");
@@ -130,6 +164,46 @@ public class OrderController {
 			FileCopyUtils.copy(inputStream, response.getOutputStream());
 		} catch (IOException ex) {
 			logger.error("Error writing techpack", ex);
+		}
+	}
+
+	@RequestMapping(value = "/order/techpack2/{orderId}", method = RequestMethod.GET)
+	public void getFile2(@PathVariable("orderId") Long orderId, HttpServletResponse response) {
+		try {
+			Order order = orderRepository.findOne(orderId);
+			final File file = new File(techpackFileStoragePath + "/" + order.getAncNo() + "/" + order.getTechPack2());
+			String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+			if (mimeType == null) {
+				System.out.println("mimetype is not detectable, will take default");
+				mimeType = "application/octet-stream";
+			}
+			response.setContentType(mimeType);
+			response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() + "\""));
+			response.setContentLength((int) file.length());
+			InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+			FileCopyUtils.copy(inputStream, response.getOutputStream());
+		} catch (IOException ex) {
+			logger.error("Error writing techpack2", ex);
+		}
+	}
+
+	@RequestMapping(value = "/order/techpack3/{orderId}", method = RequestMethod.GET)
+	public void getFile3(@PathVariable("orderId") Long orderId, HttpServletResponse response) {
+		try {
+			Order order = orderRepository.findOne(orderId);
+			final File file = new File(techpackFileStoragePath + "/" + order.getAncNo() + "/" + order.getTechPack3());
+			String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+			if (mimeType == null) {
+				System.out.println("mimetype is not detectable, will take default");
+				mimeType = "application/octet-stream";
+			}
+			response.setContentType(mimeType);
+			response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() + "\""));
+			response.setContentLength((int) file.length());
+			InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+			FileCopyUtils.copy(inputStream, response.getOutputStream());
+		} catch (IOException ex) {
+			logger.error("Error writing techpack3", ex);
 		}
 	}
 

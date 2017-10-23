@@ -25,6 +25,8 @@ public class Order implements Serializable {
 	private String ancNo;
 	private String orderNo;
 	private String techPack;
+	private String techPack2;
+	private String techPack3;
 	@ManyToOne
 	@JoinColumn(name="buyerId")
 	private Buyer buyer;
@@ -43,6 +45,10 @@ public class Order implements Serializable {
 	private String productLabel;
 	private Date shipmentDate;
 	private String shipmentMode;
+	private Date shipmentDate2;
+	private String shipmentMode2;
+	private Date shipmentDate3;
+	private String shipmentMode3;
 	private Boolean sample;
 	@OneToMany(mappedBy = "order")
 	private List<OrderPicture> orderPictures = new ArrayList<OrderPicture>();
@@ -239,5 +245,53 @@ public class Order implements Serializable {
 
 	public void setSample(Boolean sample) {
 		this.sample = sample;
+	}
+
+	public String getTechPack2() {
+		return techPack2;
+	}
+
+	public void setTechPack2(String techPack2) {
+		this.techPack2 = techPack2;
+	}
+
+	public String getTechPack3() {
+		return techPack3;
+	}
+
+	public void setTechPack3(String techPack3) {
+		this.techPack3 = techPack3;
+	}
+
+	public Date getShipmentDate2() {
+		return shipmentDate2;
+	}
+
+	public void setShipmentDate2(Date shipmentDate2) {
+		this.shipmentDate2 = shipmentDate2;
+	}
+
+	public String getShipmentMode2() {
+		return shipmentMode2;
+	}
+
+	public void setShipmentMode2(String shipmentMode2) {
+		this.shipmentMode2 = shipmentMode2;
+	}
+
+	public Date getShipmentDate3() {
+		return shipmentDate3;
+	}
+
+	public void setShipmentDate3(Date shipmentDate3) {
+		this.shipmentDate3 = shipmentDate3;
+	}
+
+	public String getShipmentMode3() {
+		return shipmentMode3;
+	}
+
+	public void setShipmentMode3(String shipmentMode3) {
+		this.shipmentMode3 = shipmentMode3;
 	}
 }
