@@ -445,11 +445,12 @@ function submitForm() {
 												<div class="row">
 													<div class="col-md-6">
 														<spring:bind path="shipmentDate2">
-															<div class="required form-group ${status.error ? 'has-error' : ''}">
+															<div>
 																<label class="control-label">Shipment Date2</label>
 																<div class="input-group">
 																	<fmt:formatDate value="${order.shipmentDate2}" pattern="MM/dd/yyyy" var="shipmentDateStr2"/>
 																	<form:input type="text" class="form-control" path="shipmentDate2" value="${shipmentDateStr2}" readonly="true"></form:input>
+																	<span class="input-group-addon bg-custom b-0 btn" onclick="clearShipmentDate2();"><span aria-hidden="true">&times;</span></i></span>
 																	<span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
 																	<form:errors path="shipmentDate2"></form:errors>
 																</div>
@@ -458,9 +459,10 @@ function submitForm() {
 		                                       		</div>
 													<div class="col-md-6">
 														<spring:bind path="shipmentMode2">
-															<div class="required form-group ${status.error ? 'has-error' : ''}">
+															<div>
 																<label class="control-label">Shipment Mode2</label>
 																<form:select path="shipmentMode2" class="form-control">
+																	<option value=""></option> 
 																	<option <c:if test="${order.shipmentMode2 == 'By Sea'}">selected="selected"</c:if>>By Sea</option>
 																	<option <c:if test="${order.shipmentMode2 == 'By Air'}">selected="selected"</c:if>>By Air</option>
 																</form:select>
@@ -472,11 +474,12 @@ function submitForm() {
 												<div class="row">
 													<div class="col-md-6">
 														<spring:bind path="shipmentDate3">
-															<div class="required form-group ${status.error ? 'has-error' : ''}">
+															<div>
 																<label class="control-label">Shipment Date3</label>
 																<div class="input-group">
 																	<fmt:formatDate value="${order.shipmentDate3}" pattern="MM/dd/yyyy" var="shipmentDateStr3"/>
 																	<form:input type="text" class="form-control" path="shipmentDate3" value="${shipmentDateStr3}" readonly="true"></form:input>
+																	<span class="input-group-addon bg-custom b-0 btn" onclick="clearShipmentDate3();"><span aria-hidden="true">&times;</span></i></span>
 																	<span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar"></i></span>
 																	<form:errors path="shipmentDate3"></form:errors>
 																</div>
@@ -485,9 +488,10 @@ function submitForm() {
 		                                       		</div>
 													<div class="col-md-6">
 														<spring:bind path="shipmentMode3">
-															<div class="required form-group ${status.error ? 'has-error' : ''}">
+															<div>
 																<label class="control-label">Shipment Mode3</label>
 																<form:select path="shipmentMode3" class="form-control">
+																	<option value=""></option> 																	
 																	<option <c:if test="${order.shipmentMode3 == 'By Sea'}">selected="selected"</c:if>>By Sea</option>
 																	<option <c:if test="${order.shipmentMode3 == 'By Air'}">selected="selected"</c:if>>By Air</option>
 																</form:select>
@@ -556,6 +560,14 @@ function submitForm() {
 		$('#techPackFile2').hide();			
 	}
 
+	function clearShipmentDate3() {
+		$('#shipmentDate3').val(null);		
+	}
+	
+	function clearShipmentDate2() {
+		$('#shipmentDate2').val(null);		
+	}
+	
 	var techPack3 = '<c:out value="${order.techPack3}"/>';
 	if(techPack3.length > 0) {
 		hideTechPackFileControl3();

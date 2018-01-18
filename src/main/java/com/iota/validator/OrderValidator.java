@@ -24,7 +24,9 @@ public class OrderValidator implements Validator {
 			errors.rejectValue("ancNo", "max.char.allowed"+" "+order.getAncNo().length());
 		}
 
-		if (order.getOrderNo().length() > 255) {
+		if (order.getOrderNo()==null || order.getOrderNo().length() ==0 ) {
+			errors.rejectValue("orderNo", "NotEmpty");
+		} else if (order.getOrderNo().length() > 255) {
 			errors.rejectValue("orderNo", "max.char.allowed"+" "+order.getOrderNo().length());
 		}
 		

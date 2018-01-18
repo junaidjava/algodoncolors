@@ -117,9 +117,11 @@ public class OrderController {
 
 	private void saveFiles(MultipartFile techPackFile,MultipartFile techPackFile2,MultipartFile techPackFile3,Order order) throws IOException {
 		final String folderPath=techpackFileStoragePath+ "/" + order.getAncNo();
-		if (!techPackFile.isEmpty()) {
-			final File mainFolder = new File(folderPath);
+		final File mainFolder = new File(folderPath);
+		if (!mainFolder.exists()) {
 			mainFolder.mkdirs();
+		}
+		if (!techPackFile.isEmpty()) {
 			final File file = new File(mainFolder, techPackFile.getOriginalFilename());
 			if (!file.exists()) {
 				file.createNewFile();
