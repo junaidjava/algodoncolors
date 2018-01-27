@@ -11,6 +11,7 @@
 <script type="text/javascript">
 var firstRowData = [];
 var firstColData = [];
+var firstColumnColorData = [];
 
 function updateTable() {
 	var table = $('#matrix');
@@ -59,10 +60,6 @@ function updateTable() {
 	if($('#measurementCategory').val().length > 0) {
 		inputForFirstCol = $('#measurementCategory').val().split(',');
 	}
-	// Adding colour input into list
-	if($('#styleColor').val().length > 0) {
-		inputForFirstCol=inputForFirstCol.concat($('#styleColor').val().split(','));
-	}
 
 	
 	// if user wanna DELETE a row
@@ -87,6 +84,48 @@ function updateTable() {
 								+ $(this).text()
 								+ '"><input type="text" id="'
 								+ $(this).text() + '_' + selectedCategory
+								+ '"/></td>');
+					}
+				});
+			}
+		});
+	}
+}
+
+function updateColorTable() {
+	var table = $('#colors');
+	var firstRow = $('#colors tr:first');
+	var firstColumn = $('#matrix tr:first').find('td');
+	var inputForFirstColumnColor = [];
+
+	// Adding colour input into list
+	if($('#styleColor').val().length > 0) {
+		firstRow.find('td').remove();
+		firstRow.append('<td align="center" valign="middle"><b>Colors</b></td>');
+		inputForFirstColumnColor=$('#styleColor').val().split(',');
+	}
+	// if user wanna DELETE a row
+	firstColumnColorData.forEach(function(colorData) {
+		var rowIndex = inputForFirstColumnColor.indexOf(colorData);
+		if (rowIndex < 0) {
+			$('.' + colorData).remove();
+			firstColumnColorData.splice(rowIndex, 1);
+		}
+	});
+	// if user wanna ADD a row
+	if (inputForFirstColumnColor) {
+		inputForFirstColumnColor.forEach(function(selectedColor) {
+			if (firstColumnColorData.indexOf(selectedColor) < 0) {
+				table.append('<tr class='+selectedColor+'><td>'
+						+ selectedColor + '</td></tr>');
+				firstColumnColorData.push(selectedColor);
+				var row = $('.' + selectedColor)
+				firstColumn.each(function(index) {
+					if (index > 0) {
+						row.append('<td class="' + selectedColor + ' '
+								+ $(this).text()
+								+ '"><input type="text" id="'
+								+ $(this).text() + '_' + selectedColor
 								+ '"/></td>');
 					}
 				});
@@ -383,7 +422,7 @@ function submitForm() {
 													<div class="col-md-6">
 														<div class="form-group">
 															<label class="control-label">Color</label> 
-															<input id="styleColor" type="text" class="form-control" data-role="tagsinput" onchange="updateTable();"/>
+															<input id="styleColor" type="text" class="form-control" data-role="tagsinput" onchange="updateColorTable();"/>
 														</div>
 
 													</div>
@@ -394,6 +433,12 @@ function submitForm() {
 															<form:input path="color" type="hidden"></form:input>
 															<form:errors path="color"></form:errors>
 															<table id="matrix"
+																class="table table-striped table-bordered dataTable no-footer">
+																<tr>
+																	<td />
+																</tr>
+															</table>
+															<table id="colors"
 																class="table table-striped table-bordered dataTable no-footer">
 																<tr>
 																	<td />
