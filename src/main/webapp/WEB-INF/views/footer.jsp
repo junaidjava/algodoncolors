@@ -38,5 +38,7 @@
     <script src="${contextPath}/resources/assets/plugins/datatables/dataTables.scroller.min.js"></script>
     
     <script src="${contextPath}/resources/assets/js/app.js"></script>
+   	<script src="${contextPath}/resources/assets/plugins/toastr/toastr.min.js"/>
+    
 </body>
 </html>

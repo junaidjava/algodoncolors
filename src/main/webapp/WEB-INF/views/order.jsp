@@ -21,16 +21,32 @@ function updateTable() {
 	var inputForFirstRow = [];
 	if($('#measurementSize').val().length > 0) {
 		inputForFirstRow = $('#measurementSize').val().split(',');
+		if(!(/^[a-z\d\-_]+$/i.test(inputForFirstRow[inputForFirstRow.length-1]))) {
+			var invalidSize = inputForFirstRow.pop();
+			$('#measurementSize').parent().find('span:contains("'+invalidSize+'") span').click();
+			toastr.error('Invalid Size Name: '+invalidSize);
+			return;	
+		}
 	}
+	var inputForFirstCol = [];
+	if($('#measurementCategory').val().length > 0) {
+		inputForFirstCol = $('#measurementCategory').val().split(',');
+		if(!(/^[a-z\d\-_]+$/i.test(inputForFirstCol[inputForFirstCol.length-1]))) {
+			var invalidMeasurement = inputForFirstCol.pop();
+			$('#measurementCategory').parent().find('span:contains("'+invalidMeasurement+'") span').click();
+			toastr.error('Invalid Measurement Name: '+invalidMeasurement);
+			return;	
+		}
+	}	
 
 	// if user wanna DELETE a column
-	firstRowData.forEach(function(cell_0xC_data) {
+	firstRowData.forEach(function(cell_0xC_data, index) {
 		var colIndex = inputForFirstRow.indexOf(cell_0xC_data);
 		if (colIndex < 0) {
 			//remove this column from UI
 			$('.' + cell_0xC_data).remove();
 			//also remove this column from firstRowData array
-			firstRowData.splice(colIndex, 1);
+			firstRowData.splice(index, 1);
 		}
 	});
 
@@ -56,28 +72,22 @@ function updateTable() {
 		});
 	}
 
-	var inputForFirstCol = [];
-	if($('#measurementCategory').val().length > 0) {
-		inputForFirstCol = $('#measurementCategory').val().split(',');
-	}
-
-	
 	// if user wanna DELETE a row
-	firstColData.forEach(function(cell_Rx0_data) {
+	firstColData.forEach(function(cell_Rx0_data, index) {
 		var rowIndex = inputForFirstCol.indexOf(cell_Rx0_data);
 		if (rowIndex < 0) {
 			$('.' + cell_Rx0_data).remove();
-			firstColData.splice(rowIndex, 1);
+			firstColData.splice(index, 1);
 		}
 	});
 	// if user wanna ADD a row
 	if (inputForFirstCol) {
 		inputForFirstCol.forEach(function(selectedCategory) {
 			if (firstColData.indexOf(selectedCategory) < 0) {
-				table.append('<tr class='+selectedCategory+'><td>'
+				table.append('<tr class="'+selectedCategory+' category-row"><td>'
 						+ selectedCategory + '</td></tr>');
 				firstColData.push(selectedCategory);
-				var row = $('.' + selectedCategory)
+				var row = $('.category-row.' + selectedCategory)
 				firstColumn.each(function(index) {
 					if (index > 0) {
 						row.append('<td class="' + selectedCategory + ' '
@@ -103,33 +113,44 @@ function updateColorTable() {
 		firstRow.find('td').remove();
 		firstRow.append('<td align="center" valign="middle"><b>Colors</b></td>');
 		inputForFirstColumnColor=$('#styleColor').val().split(',');
+
+		if(!(/^[a-z\d\-_]+$/i.test(inputForFirstColumnColor[inputForFirstColumnColor.length-1]))) {
+			var invalidColor = inputForFirstColumnColor.pop();
+			$('#styleColor').parent().find('span:contains("'+invalidColor+'") span').click();
+			toastr.error('Invalid Color Name: '+invalidColor);
+			return;	
+		}
 	}
 	// if user wanna DELETE a row
-	firstColumnColorData.forEach(function(colorData) {
+	firstColumnColorData.forEach(function(colorData, index) {
 		var rowIndex = inputForFirstColumnColor.indexOf(colorData);
 		if (rowIndex < 0) {
 			$('.' + colorData).remove();
-			firstColumnColorData.splice(rowIndex, 1);
+			firstColumnColorData.splice(index, 1);
 		}
 	});
 	// if user wanna ADD a row
 	if (inputForFirstColumnColor) {
 		inputForFirstColumnColor.forEach(function(selectedColor) {
 			if (firstColumnColorData.indexOf(selectedColor) < 0) {
-				table.append('<tr class='+selectedColor+'><td>'
+				table.append('<tr class="'+selectedColor+' color-row"><td>'
 						+ selectedColor + '</td></tr>');
 				firstColumnColorData.push(selectedColor);
-				var row = $('.' + selectedColor)
-				firstColumn.each(function(index) {
-					if (index > 0) {
+			}
+			var row = $('.color-row.' + selectedColor)
+			firstColumn.each(function(index) {
+				if (index > 0) {
+					var tdText = $(this).text();
+					var tdElement = $('.'+tdText+'.'+selectedColor);
+					if (tdElement.length === 0) {
 						row.append('<td class="' + selectedColor + ' '
 								+ $(this).text()
 								+ '"><input type="text" id="'
 								+ $(this).text() + '_' + selectedColor
 								+ '"/></td>');
 					}
-				});
-			}
+				}
+			});
 		});
 	}
 }
@@ -397,7 +418,7 @@ function submitForm() {
 													<div class="col-md-6">
 														<div class="form-group">
 															<label class="control-label">Size</label>
-															<input id="measurementSize" type="text" class="form-control" data-role="tagsinput" onchange="updateTable();"/>
+															<input id="measurementSize" type="text" class="form-control" data-role="tagsinput" onchange="updateTable();updateColorTable();"/>
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -416,7 +437,7 @@ function submitForm() {
 													<div class="col-md-6">
 														<div class="form-group">
 															<label class="control-label">Measurement</label> 
-															<input id="measurementCategory" type="text" class="form-control" data-role="tagsinput" onchange="updateTable();"/>
+															<input id="measurementCategory" type="text" class="form-control" data-role="tagsinput" onkeyup="alert(this.value);" onchange="updateTable();"/>
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -426,7 +447,7 @@ function submitForm() {
 														</div>
 
 													</div>
-													<div class="col-sm-12">
+													<div class="col-sm-12" style="overflow-x:hidden; overflow: auto;">
 														<div class="form-group ${status.error ? 'has-error' : ''}">
 															<form:input path="size" type="hidden"></form:input>
 															<form:errors path="size"></form:errors>
@@ -670,5 +691,4 @@ function submitForm() {
 			});
 		});		
 	}			
-
-	</script>
+</script>

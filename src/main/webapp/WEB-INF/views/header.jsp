@@ -8,7 +8,8 @@
     <link href="${contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="${contextPath}/resources/assets/css/icons.css" rel="stylesheet" type="text/css">
     <link href="${contextPath}/resources/assets/css/style.css" rel="stylesheet" type="text/css">
-    
+	<link href="${contextPath}/resources/assets/plugins/toastr/toastr.min.css" rel="stylesheet"/>
+	    
     <link href="${contextPath}/resources/assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
