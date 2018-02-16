@@ -135,7 +135,6 @@ CREATE TABLE `algodon_order_picture` (
   CONSTRAINT `fk_order_picture_orderId` FOREIGN KEY (`orderId`) REFERENCES `algodon_order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `algodon_order_picture`;
 ALTER TABLE algodon_order DROP COLUMN category;
 ALTER TABLE algodon_order CHANGE tackPack techPack varchar(500);
 -- dated 21-oct-2017
