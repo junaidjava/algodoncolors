@@ -22,6 +22,8 @@
     <link href="${contextPath}/resources/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="${contextPath}/resources/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="${contextPath}/resources/assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="${contextPath}/resources/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="${contextPath}/resources/assets/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

@@ -45,6 +45,7 @@
 									<div class="panel-body">
 										<div class="row m-b-15">
 											<div class="col-sm-12 text-right">
+												<a href="#uploadModal" class="btn btn-success" data-toggle="modal">Upload</a>
 												<a href="${contextPath}/supplier-setup" class="btn btn-success">Add Supplier</a>
 											</div>
 										</div>
@@ -84,5 +85,117 @@
 					</div>
                 </div>
             </div>
+            
+            <!--  Upload Modal -->
+            <div id="uploadModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		      <div class="modal-dialog" role="document">
+		        <div class="modal-content">
+		          <div class="modal-header">
+		            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		              <span aria-hidden="true">&times;</span>
+		            </button>
+		            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+		          </div>
+		          <div class="modal-body">
+		            <!-- COMPONENT START -->              
+		            <div class="form-group">
+		                <div class="input-group input-file">
+		                    <select class="form-control" name="wcl-employees1" id="wcl-employees1">
+		                        <option value="select">Select Name</option>
+		                        <option value="Front">Front</option>
+		                        <option value="Back">Back</option>
+		                        <option value="Left">Left</option>
+		                        <option value="Right">Right</option>
+		                    </select>
+		                    <span class="input-group-btn">
+		                        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+		                          <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+		                          <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
+		                          <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+		                        </div>
+		                    </span>
+		                </div>
+		            </div>
+		            <!-- COMPONENT END -->
+		              
+		            <!-- COMPONENT  START -->
+		            <div class="form-group">
+		                <div class="input-group input-file">
+		                    <select class="form-control" name="wcl-employees2" id="wcl-employees2">
+		                        <option value="select">Select Name</option>
+		                        <option value="Front">Front</option>
+		                        <option value="Back">Back</option>
+		                        <option value="Left">Left</option>
+		                        <option value="Right">Right</option>
+		                    </select>
+		                    <span class="input-group-btn">
+		                        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+		                          <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+		                          <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
+		                          <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+		                        </div>
+		                    </span>
+		                </div>
+		            </div>
+		            <!-- COMPONENT END -->
+		              
+		            <!-- COMPONENT  START -->
+		            <div class="form-group">
+		                <div class="input-group input-file">
+		                    <select class="form-control" name="wcl-employees3" id="wcl-employees3">
+		                        <option value="select">Select Name</option>
+		                        <option value="Front">Front</option>
+		                        <option value="Back">Back</option>
+		                        <option value="Left">Left</option>
+		                        <option value="Right">Right</option>
+		                    </select>
+		                    <span class="input-group-btn">
+		                        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+		                          <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+		                          <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
+		                          <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+		                        </div>
+		                    </span>
+		                </div>
+		            </div>
+		            <div class="addMore-container"></div>
+		              
+		            <button class="btn btn-primary" id="addMore">Add More</button>
+		            <!-- COMPONENT END -->
+		          </div>
+		          <div class="modal-footer">
+		            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		            <button type="button" class="btn btn-primary">Save changes</button>
+		          </div>
+		        </div>
+		      </div>
+            </div>
+            <!-- /Upload Modal -->
+                                          
 		<%@ include file = "footer.jsp" %>
+		<script>
+	        $("#uploadModal").on('show.bs.modal', function () {
+	            var $select = $("select");
+	            $select.on("change", function() {
+	                var selected = [];  
+	                $.each($select, function(index, select) {           
+	                    if (select.value !== "") { selected.push(select.value); }
+	                });         
+	               $("option").prop("disabled", false);         
+	               for (var index in selected) { $('option[value="'+selected[index]+'"]').prop("disabled", true); }
+	            });
+	        });
+	        
+	        $("#addMore").on("click", function(){
+	            var moreField =  
+	                '<div class="form-group"><div class="input-group input-file">'+
+	                    '<input type="text" class="form-control" placeholder="Enter Name" />'+
+	                    '<span class="input-group-btn">'+
+	                        '<div class="fileinput fileinput-new input-group" data-provides="fileinput">'+
+	                          '<div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i><span class="fileinput-filename"></span></div>'+
+	                          '<span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span><a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a></div>'+
+	                    '</span></div></div>';
+	            $(".addMore-container").append(moreField);
+	        });
+		</script>
 		<script src="${contextPath}/resources/assets/pages/datatables.init.js"></script>

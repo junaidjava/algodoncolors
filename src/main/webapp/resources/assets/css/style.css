@@ -25,6 +25,7 @@ File: Main Css File
   - Account Pages
   - Invoice
   - Menu
+  - File Upload
 */
 /* ==============
   General
@@ -3655,4 +3656,24 @@ File: Responsive
     color: #e32;
     content: ' *';
     display:inline;
+}
+/* ==== =====
+File Upload
+============= */
+
+.fileinput{
+    height: 34px;
+}
+.fileinput .form-control {
+    display: none;
+}
+.fileinput.fileinput-exists .form-control {
+    display: block;
+    width: 140px;
+}
+.fileinput .fileinput-filename {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100px;
 }

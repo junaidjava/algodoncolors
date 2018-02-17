@@ -26,6 +26,7 @@
     <script src="${contextPath}/resources/assets/plugins/datatables/dataTables.bootstrap.js"></script>
     <script src="${contextPath}/resources/assets/plugins/datatables/dataTables.buttons.min.js"></script>
     <script src="${contextPath}/resources/assets/plugins/datatables/buttons.bootstrap.min.js"></script>
+    <script src="${contextPath}/resources/assets/plugins/select2/dist/js/select2.min.js"></script>
     
     <script src="${contextPath}/resources/assets/plugins/datatables/pdfmake.min.js"></script>
     <script src="${contextPath}/resources/assets/plugins/datatables/vfs_fonts.js"></script>
@@ -36,6 +37,7 @@
     <script src="${contextPath}/resources/assets/plugins/datatables/dataTables.responsive.min.js"></script>
     <script src="${contextPath}/resources/assets/plugins/datatables/responsive.bootstrap.min.js"></script>
     <script src="${contextPath}/resources/assets/plugins/datatables/dataTables.scroller.min.js"></script>
+    <script src="${contextPath}/resources/assets/plugins/jasny/jasny-bootstrap.min.js"></script>
     
     <script src="${contextPath}/resources/assets/js/app.js"></script>
    	<script src="${contextPath}/resources/assets/plugins/toastr/toastr.min.js"/>
