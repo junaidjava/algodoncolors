@@ -40,7 +40,7 @@
     <script src="${contextPath}/resources/assets/plugins/jasny/jasny-bootstrap.min.js"></script>
     
     <script src="${contextPath}/resources/assets/js/app.js"></script>
-   	<script src="${contextPath}/resources/assets/plugins/toastr/toastr.min.js"/>
+   	<script src="${contextPath}/resources/assets/plugins/toastr/toastr.min.js"></script>
     
 </body>
 </html>
