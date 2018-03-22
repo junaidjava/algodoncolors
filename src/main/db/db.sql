@@ -86,15 +86,15 @@ INSERT INTO `item_group` VALUES (2,'Trouser','cm',1,now(),now());
 INSERT INTO `item_group` VALUES (3,'Formal Shirt','inch',1,now(),now());
 INSERT INTO `item_group` VALUES (4,'Casual Shirt','inch',1,now(),now());
 
-  
+
 DROP TABLE IF EXISTS algodon_order;
 CREATE TABLE algodon_order (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT ,
   `ancNo` varchar(255) NOT NULL,
   `orderNo` varchar(255) NOT NULL,
-  `techPack` varchar(500),  
-  `techPack2` varchar(500),  
-  `techPack3` varchar(500),  
+  `techPack` varchar(500),
+  `techPack2` varchar(500),
+  `techPack3` varchar(500),
   `buyerId` BIGINT(20) NOT NULL,
   `washStandard` BIT(1) DEFAULT true,
   `swatch` BIT(1) DEFAULT true,
@@ -120,7 +120,7 @@ CREATE TABLE algodon_order (
   UNIQUE INDEX `ancNo_UNIQUE` (`ancNo` ASC),
   UNIQUE INDEX `orderNo_UNIQUE` (`orderNo` ASC),
   CONSTRAINT `fk_order_buyerId` FOREIGN KEY (`buyerId`) REFERENCES `buyer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_order_itemGroupId` FOREIGN KEY (`itemGroupId`) REFERENCES `item_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE  
+  CONSTRAINT `fk_order_itemGroupId` FOREIGN KEY (`itemGroupId`) REFERENCES `item_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `algodon_order_picture`;
@@ -134,20 +134,3 @@ CREATE TABLE `algodon_order_picture` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_order_picture_orderId` FOREIGN KEY (`orderId`) REFERENCES `algodon_order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-ALTER TABLE algodon_order DROP COLUMN category;
-ALTER TABLE algodon_order CHANGE tackPack techPack varchar(500);
--- dated 21-oct-2017
-ALTER TABLE algodon_order DROP COLUMN `sampleType` ;
-ALTER TABLE algodon_order DROP COLUMN `weight` ;
-ALTER TABLE algodon_order DROP COLUMN `packing` ;
-
-ALTER TABLE algodon_order ADD COLUMN `techPack2` varchar(500) AFTER `techPack`;
-ALTER TABLE algodon_order ADD COLUMN `techPack3` varchar(500) AFTER `techPack2`;
-ALTER TABLE algodon_order ADD COLUMN `shipmentMode2` varchar(100) AFTER `shipmentMode`;
-ALTER TABLE algodon_order ADD COLUMN `shipmentMode3` varchar(100) AFTER `shipmentMode2`;
-ALTER TABLE algodon_order ADD COLUMN `sample` BIT(1) DEFAULT false AFTER `shipmentMode3`;
-
-ALTER TABLE algodon_order ADD COLUMN `shipmentDate2` DATETIME AFTER `shipmentDate`;
-ALTER TABLE algodon_order ADD COLUMN `shipmentDate3` DATETIME AFTER `shipmentDate2`;
-  
