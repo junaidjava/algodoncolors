@@ -1,4 +1,5 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/beans
@@ -8,19 +9,40 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
+	<bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames">
             <list>
                 <value>classpath:validation</value>
+                <value>classpath:ResourceBundle</value>
             </list>
         </property>
+        <property name="defaultEncoding" value="UTF-8" />
     </bean>
 
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/views/" />
-        <!-- <property name="viewClass" value="com.iota.web.view.MyJstlView" /> -->
-        <property name="suffix" value=".jsp" />
-    </bean>
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+
+	<bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="locale" />
+	</bean>
+
+	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" >
+		<property name="interceptors">
+		   	<list>
+				<ref bean="localeChangeInterceptor" />
+		   	</list>
+		</property>
+	</bean>
+
 <!--     <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
         <props>
@@ -34,4 +56,11 @@
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="1073741824"/>
 	</bean>
+
+
+<!-- 	<bean id="jasperReport"		class="com.iota.web.ReportGenerator"/>
+
+	<bean parent="jasperReport" id="myReport2017"/>
+ -->
+
 </beans>
