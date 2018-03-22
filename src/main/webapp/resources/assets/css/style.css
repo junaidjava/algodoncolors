@@ -3273,7 +3273,7 @@ body.fixed-left .side-menu.left {
 #sidebar-menu ul ul a {
   color: rgba(42, 50, 60, 0.8);
   display: block;
-  padding: 10px 25px 10px 65px;
+  padding: 10px 25px 10px 45px;
 }
 #sidebar-menu ul ul a:hover {
   color: #2a323c;
