@@ -59,7 +59,7 @@
 		// if user wanna ADD a column
 		if (inputForFirstRow) {
 			if(!$(firstRow).find('.threshold').length) {
-				firstRow.append('<td class="threshold">Threshold</td>');				
+				firstRow.append('<td class="threshold">Threshold</td>');
 			}
 			inputForFirstRow.forEach(function(selectedSize) {
 				if (firstRowData.indexOf(selectedSize) < 0) {
@@ -172,7 +172,7 @@
 					});
 		}
 	}
-	
+
 	var totalQuantity = 0;
 	function calculateTotal() {
 		if ($('#measurementSize').val().length > 0) {
@@ -678,6 +678,10 @@
 									<div class="form-actions">
 										<div class="row">
 											<div class="col-md-12 text-right">
+
+<c:if test="${order.id > 0}">
+<a href="#uploadModal" class="btn btn-success" data-toggle="modal">Upload</a>
+</c:if>
 												<input type="button" class="btn btn-primary"
 													onclick="submitForm();" value="Save" />
 											</div>
@@ -691,8 +695,127 @@
 			</div>
 		</div>
 	</div>
+
+	    <!--  Upload Modal -->
+    <div id="uploadModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		        <h5 class="modal-title" id="exampleModalLabel">Upload</h5>
+		      </div>
+		      <div class="modal-body">
+		        <!-- COMPONENT START -->
+		        <div class="form-group">
+		            <div class="input-group input-file">
+		                <select class="form-control" name="imageType1" id="imageType1">
+		                    <option value="select">Select Name</option>
+		                    <option value="Front">Front</option>
+		                    <option value="Back">Back</option>
+		                    <option value="Left">Left</option>
+		                    <option value="Right">Right</option>
+		                </select>
+		                <span class="input-group-btn">
+		                    <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+		                      <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+		                      <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
+		                      <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+		                    </div>
+		                </span>
+		            </div>
+		        </div>
+		        <!-- COMPONENT END -->
+
+		        <!-- COMPONENT  START -->
+		        <div class="form-group">
+		            <div class="input-group input-file">
+		                <select class="form-control" name="imageType2" id="imageType2">
+		                    <option value="select">Select Name</option>
+		                    <option value="Front">Front</option>
+		                    <option value="Back">Back</option>
+		                    <option value="Left">Left</option>
+		                    <option value="Right">Right</option>
+		                </select>
+		                <span class="input-group-btn">
+		                    <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+		                      <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+		                      <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
+		                      <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+		                    </div>
+		                </span>
+		            </div>
+		        </div>
+		        <!-- COMPONENT END -->
+
+		        <!-- COMPONENT  START -->
+		        <div class="form-group">
+		            <div class="input-group input-file">
+		                <select class="form-control" name="imageType3" id="imageType3">
+		                    <option value="select">Select Name</option>
+		                    <option value="Front">Front</option>
+		                    <option value="Back">Back</option>
+		                    <option value="Left">Left</option>
+		                    <option value="Right">Right</option>
+		                </select>
+		                <span class="input-group-btn">
+		                    <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+		                      <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+		                      <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
+		                      <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+		                    </div>
+		                </span>
+		            </div>
+		        </div>
+		        <!-- COMPONENT END -->
+		        <div class="addMore-container"></div>
+		        <button class="btn btn-primary" id="addMore">Add More</button>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary" id="saveimages">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+      </div>
+      <!-- /Upload Modal -->
+
 	<%@ include file="footer.jsp"%>
+	<script>
+        $("#uploadModal").on('show.bs.modal', function () {
+            var $select = $("select");
+            $select.on("change", function() {
+                var selected = [];
+                $.each($select, function(index, select) {
+                    if (select.value !== "") { selected.push(select.value); }
+                });
+               $("option").prop("disabled", false);
+               for (var index in selected) { $('option[value="'+selected[index]+'"]').prop("disabled", true); }
+            });
+        });
+
+        $("#addMore").on("click", function(){
+            var moreField =
+                '<div class="form-group"><div class="input-group input-file">'+
+                    '<input type="text" class="form-control" placeholder="Enter Name" />'+
+                    '<span class="input-group-btn">'+
+                        '<div class="fileinput fileinput-new input-group" data-provides="fileinput">'+
+                          '<div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i><span class="fileinput-filename"></span></div>'+
+                          '<span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span><a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a></div>'+
+                    '</span></div></div>';
+            $(".addMore-container").append(moreField);
+        });
+
+        $("#saveimages").on("click", function(){
+            var orderId='<c:out value="${order.id}"/>';
+alert('saving images into folder for this orderId: '+orderId);
+        });
+
+	</script>
+
 	<script src="${contextPath}/resources/assets/pages/form-advanced.js"></script>
+
 	<script>
 		var techPack = '<c:out value="${order.techPack}"/>';
 		if (techPack.length > 0) {
