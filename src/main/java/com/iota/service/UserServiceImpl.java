@@ -51,4 +51,9 @@ public class UserServiceImpl implements UserService {
 		dbUser.setLastName(userForm.getLastName());
 		userRepository.save(dbUser);
 	}
+
+	@Override
+	public User findByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
 }
